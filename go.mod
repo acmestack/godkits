@@ -1,3 +1,3 @@
-module github.com/OpeningO/godkits
+module github.com/openingo/godkits
 
 go 1.18
