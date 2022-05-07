@@ -17,7 +17,10 @@
 
 package stringx
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestEmpty(t *testing.T) {
 	type args struct {
@@ -96,6 +99,160 @@ func TestDefaultIfEmpty(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := DefaultIfEmpty(tt.args.str, tt.args.defaultStr); got != tt.want {
 				t.Errorf("DefaultIfEmpty() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToInt(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			args: args{str: "123"},
+			want: 123,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToInt(tt.args.str); got != tt.want {
+				t.Errorf("ToInt() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToBytes(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want []byte
+	}{
+		{
+			args: args{str: "123"},
+			want: []byte("123"),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToBytes(tt.args.str); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ToBytes() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToComplex(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want complex128
+	}{
+		{
+			args: args{str: "123"},
+			want: 123,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToComplex(tt.args.str); got != tt.want {
+				t.Errorf("ToComplex() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToFloat64(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want float64
+	}{
+		{
+			args: args{str: "0.001"},
+			want: 0.001,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToFloat64(tt.args.str); got != tt.want {
+				t.Errorf("ToFloat64() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToBool(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			args: args{str: "1"},
+			want: true,
+		},
+		{
+			args: args{str: "0"},
+			want: false,
+		},
+		{
+			args: args{str: "t"},
+			want: true,
+		},
+		{
+			args: args{str: "f"},
+			want: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToBool(tt.args.str); got != tt.want {
+				t.Errorf("ToBool() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToUnit(t *testing.T) {
+	type args struct {
+		str  string
+		base int
+	}
+	tests := []struct {
+		name string
+		args args
+		want uint64
+	}{
+		{
+			args: args{
+				str:  "10",
+				base: 10,
+			},
+			want: 10,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToUnit(tt.args.str, tt.args.base); got != tt.want {
+				t.Errorf("ToUnit() = %v, want %v", got, tt.want)
 			}
 		})
 	}
