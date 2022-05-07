@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package gox
+package stringx
 
 import "testing"
 

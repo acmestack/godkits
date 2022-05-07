@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package gox
+package stringx
 
 // NotEmpty strings
 func NotEmpty(str ...string) bool {
