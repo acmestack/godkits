@@ -24,13 +24,52 @@ import (
 
 const key = "1234567891234567"
 
+func TestDecrypt0(t *testing.T) {
+	type args struct {
+		encrypted []byte
+		strKey    string
+	}
+
+	encrypt, err := EncryptString("zcq", []byte(key))
+
+	tests := []struct {
+		name    string
+		args    args
+		want    []byte
+		wantErr bool
+	}{
+		{
+			args: args{
+				encrypted: encrypt,
+				strKey:    key,
+			},
+			want:    []byte("zcq"),
+			wantErr: err != nil,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Decrypt0(tt.args.encrypted, tt.args.strKey)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Decrypt0() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Decrypt0() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestDecrypt(t *testing.T) {
 	type args struct {
 		encrypted []byte
 		key       []byte
 	}
+
 	k := []byte(key)
 	encrypt, err := Encrypt([]byte("zcq"), k)
+
 	tests := []struct {
 		name    string
 		args    args
@@ -104,7 +143,7 @@ func TestEncrypt1(t *testing.T) {
 		strKey     string
 	}
 
-	encrypt, err := Encrypt1([]byte("zcq"), key)
+	encrypt, err := Encrypt0([]byte("zcq"), key)
 
 	tests := []struct {
 		name    string
@@ -123,13 +162,13 @@ func TestEncrypt1(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := Encrypt1(tt.args.originData, tt.args.strKey)
+			got, err := Encrypt0(tt.args.originData, tt.args.strKey)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Encrypt1() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Encrypt0() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Encrypt1() got = %v, want %v", got, tt.want)
+				t.Errorf("Encrypt0() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -178,7 +217,7 @@ func TestEncryptString1(t *testing.T) {
 		strKey string
 	}
 
-	encrypt, err := EncryptString1("zcq", key)
+	encrypt, err := EncryptString0("zcq", key)
 
 	tests := []struct {
 		name    string
@@ -197,13 +236,13 @@ func TestEncryptString1(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := EncryptString1(tt.args.str, tt.args.strKey)
+			got, err := EncryptString0(tt.args.str, tt.args.strKey)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("EncryptString1() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("EncryptString0() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("EncryptString1() got = %v, want %v", got, tt.want)
+				t.Errorf("EncryptString0() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

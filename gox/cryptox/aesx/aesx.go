@@ -23,18 +23,18 @@ import (
 	"crypto/cipher"
 )
 
+// EncryptString0 the origin data with the string key
+func EncryptString0(str string, strKey string) ([]byte, error) {
+	return Encrypt([]byte(str), bytesKey(strKey))
+}
+
 // EncryptString the origin data with the key
 func EncryptString(str string, key []byte) ([]byte, error) {
 	return Encrypt([]byte(str), key)
 }
 
-// EncryptString1 the origin data with the string key
-func EncryptString1(str string, strKey string) ([]byte, error) {
-	return Encrypt([]byte(str), bytesKey(strKey))
-}
-
-// Encrypt1 the origin data with the string key
-func Encrypt1(originData []byte, strKey string) ([]byte, error) {
+// Encrypt0 the origin data with the string key
+func Encrypt0(originData []byte, strKey string) ([]byte, error) {
 	return Encrypt(originData, bytesKey(strKey))
 }
 
@@ -53,6 +53,11 @@ func Encrypt(originData []byte, key []byte) ([]byte, error) {
 	return encrypted, nil
 }
 
+// Decrypt0 the encrypted data with the string key
+func Decrypt0(encrypted []byte, strKey string) ([]byte, error) {
+	return Decrypt(encrypted, bytesKey(strKey))
+}
+
 // Decrypt the encrypted data with the key
 func Decrypt(encrypted []byte, key []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
@@ -66,11 +71,6 @@ func Decrypt(encrypted []byte, key []byte) ([]byte, error) {
 	blockMode.CryptBlocks(origData, encrypted)
 	origData = pkcs5UnPadding(origData)
 	return origData, nil
-}
-
-// Decrypt0 the encrypted data with the string key
-func Decrypt0(encrypted []byte, strKey string) ([]byte, error) {
-	return Decrypt(encrypted, bytesKey(strKey))
 }
 
 func bytesKey(strKey string) []byte {
