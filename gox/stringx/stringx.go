@@ -23,13 +23,23 @@ import (
 	"github.com/openingo/godkits/gox/defaultx"
 )
 
-// NotEmpty strings
-func NotEmpty(str ...string) bool {
-	return !Empty(str...)
+// NotEmpty string
+func NotEmpty(str string) bool {
+	return !Empty(str)
 }
 
-// Empty strings
-func Empty(str ...string) bool {
+// Empty string
+func Empty(str string) bool {
+	return str == ""
+}
+
+// NoneEmpty strings
+func NoneEmpty(str ...string) bool {
+	return !AnyEmpty(str...)
+}
+
+// AnyEmpty strings
+func AnyEmpty(str ...string) bool {
 	if str == nil || len(str) == 0 {
 		return true
 	}

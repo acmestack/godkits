@@ -22,7 +22,7 @@ import (
 	"testing"
 )
 
-func TestEmpty(t *testing.T) {
+func TestAnyEmpty(t *testing.T) {
 	type args struct {
 		str []string
 	}
@@ -42,14 +42,14 @@ func TestEmpty(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Empty(tt.args.str...); got != tt.want {
-				t.Errorf("Empty() = %v, want %v", got, tt.want)
+			if got := AnyEmpty(tt.args.str...); got != tt.want {
+				t.Errorf("AnyEmpty() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestNotEmpty(t *testing.T) {
+func TestNoneEmpty(t *testing.T) {
 	type args struct {
 		str []string
 	}
@@ -69,8 +69,8 @@ func TestNotEmpty(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NotEmpty(tt.args.str...); got != tt.want {
-				t.Errorf("NotEmpty() = %v, want %v", got, tt.want)
+			if got := NoneEmpty(tt.args.str...); got != tt.want {
+				t.Errorf("NoneEmpty() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -253,6 +253,52 @@ func TestToUnit(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := ToUnit(tt.args.str, tt.args.base); got != tt.want {
 				t.Errorf("ToUnit() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestNotEmpty(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			args: args{str: "zcq"},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := NotEmpty(tt.args.str); got != tt.want {
+				t.Errorf("NotEmpty() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestEmpty(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			args: args{str: ""},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Empty(tt.args.str); got != tt.want {
+				t.Errorf("Empty() = %v, want %v", got, tt.want)
 			}
 		})
 	}
