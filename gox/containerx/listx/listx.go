@@ -15,22 +15,16 @@
  * limitations under the License.
  */
 
-package errorsx
+package listx
 
-import (
-	"errors"
-	"log"
-)
+import "container/list"
 
-// LogError call log.Fatalln
-func LogError(err error) error {
-	if err != nil {
-		log.Fatalln(err)
-	}
-	return err
+// NotEmpty list
+func NotEmpty(lst *list.List) bool {
+	return !Empty(lst)
 }
 
-// Err with message
-func Err(message string) error {
-	return errors.New(message)
+// Empty list
+func Empty(lst *list.List) bool {
+	return lst.Len() == 0
 }

@@ -17,20 +17,27 @@
 
 package errorsx
 
-import (
-	"errors"
-	"log"
-)
+import "testing"
 
-// LogError call log.Fatalln
-func LogError(err error) error {
-	if err != nil {
-		log.Fatalln(err)
+func TestErr(t *testing.T) {
+	type args struct {
+		message string
 	}
-	return err
-}
-
-// Err with message
-func Err(message string) error {
-	return errors.New(message)
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			args:    args{message: "error message"},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := Err(tt.args.message); (err != nil) != tt.wantErr {
+				t.Errorf("Err() error = %v, wantErr %v, logError %v", err, tt.wantErr, LogError(err))
+			}
+		})
+	}
 }
