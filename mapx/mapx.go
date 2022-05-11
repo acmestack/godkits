@@ -15,31 +15,4 @@
  * limitations under the License.
  */
 
-package listx
-
-import "container/list"
-
-// Listx extend from list.List
-type Listx struct {
-	list.List
-}
-
-// NotEmpty list
-func NotEmpty(lst *list.List) bool {
-	return !Empty(lst)
-}
-
-// NotEmpty list
-func (lst *Listx) NotEmpty() bool {
-	return !lst.Empty()
-}
-
-// Empty list
-func Empty(lst *list.List) bool {
-	return lst.Len() == 0
-}
-
-// Empty list
-func (lst *Listx) Empty() bool {
-	return lst.Len() == 0
-}
+package mapx
