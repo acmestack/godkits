@@ -22,17 +22,11 @@ import (
 	"testing"
 )
 
-var emptyArrayList = Arraylist{
-	elements: []any{},
-	size:     0,
-}
-
-var notEmptyArrayList = Arraylist{
-	elements: []any{"hello", "world"},
-	size:     2,
-}
-
 func TestArraylist_Add(t *testing.T) {
+	emptyArrayList := Arraylist{
+		elements: []any{},
+		size:     0,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -65,6 +59,10 @@ func TestArraylist_Add(t *testing.T) {
 }
 
 func TestArraylist_Contains(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -82,8 +80,8 @@ func TestArraylist_Contains(t *testing.T) {
 	}{
 		{
 			fields: fields{
-				elements: notEmptyArrayList.elements,
-				size:     notEmptyArrayList.size,
+				elements: arrayList.elements,
+				size:     arrayList.size,
 			},
 			args:  args{element: "hello"},
 			want:  true,
@@ -108,6 +106,10 @@ func TestArraylist_Contains(t *testing.T) {
 }
 
 func TestArraylist_Empty(t *testing.T) {
+	emptyArrayList := Arraylist{
+		elements: []any{},
+		size:     0,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -139,6 +141,10 @@ func TestArraylist_Empty(t *testing.T) {
 }
 
 func TestArraylist_Get(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -154,8 +160,8 @@ func TestArraylist_Get(t *testing.T) {
 	}{
 		{
 			fields: fields{
-				elements: notEmptyArrayList.elements,
-				size:     notEmptyArrayList.size,
+				elements: arrayList.elements,
+				size:     arrayList.size,
 			},
 			args: args{index: 0},
 			want: "hello",
@@ -175,6 +181,10 @@ func TestArraylist_Get(t *testing.T) {
 }
 
 func TestArraylist_IndexOf(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -190,8 +200,8 @@ func TestArraylist_IndexOf(t *testing.T) {
 	}{
 		{
 			fields: fields{
-				elements: notEmptyArrayList.elements,
-				size:     notEmptyArrayList.size,
+				elements: arrayList.elements,
+				size:     arrayList.size,
 			},
 			args: args{"hello"},
 			want: 0,
@@ -212,8 +222,8 @@ func TestArraylist_IndexOf(t *testing.T) {
 
 func TestArraylist_Remove(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: notEmptyArrayList.elements,
-		size:     notEmptyArrayList.size,
+		elements: []any{"hello", "world"},
+		size:     2,
 	}
 	type fields struct {
 		elements []any
@@ -251,6 +261,10 @@ func TestArraylist_Remove(t *testing.T) {
 }
 
 func TestArraylist_Size(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -262,8 +276,8 @@ func TestArraylist_Size(t *testing.T) {
 	}{
 		{
 			fields: fields{
-				elements: notEmptyArrayList.elements,
-				size:     notEmptyArrayList.size,
+				elements: arrayList.elements,
+				size:     arrayList.size,
 			},
 			want: 2,
 		},
@@ -282,6 +296,10 @@ func TestArraylist_Size(t *testing.T) {
 }
 
 func TestArraylist_find(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
 	type fields struct {
 		elements []any
 		size     int
@@ -298,8 +316,8 @@ func TestArraylist_find(t *testing.T) {
 	}{
 		{
 			fields: fields{
-				elements: notEmptyArrayList.elements,
-				size:     notEmptyArrayList.size,
+				elements: arrayList.elements,
+				size:     arrayList.size,
 			},
 			args:  args{element: "hello"},
 			want:  true,
@@ -324,6 +342,10 @@ func TestArraylist_find(t *testing.T) {
 }
 
 func TestNew(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
 	type args struct {
 		elements []any
 	}
@@ -334,7 +356,7 @@ func TestNew(t *testing.T) {
 		want *Arraylist
 	}{
 		{
-			args: args{notEmptyArrayList.elements},
+			args: args{arrayList.elements},
 			want: New("hello", "world"),
 		},
 	}
