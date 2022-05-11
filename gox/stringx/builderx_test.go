@@ -45,7 +45,7 @@ func TestBuilderX_JoinString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			builder := &BuilderX{
+			builder := &Builder{
 				Builder: tt.fields.Builder,
 			}
 			got, err := builder.JoinString(tt.args.strArray...)
@@ -84,7 +84,7 @@ func TestBuilderX_JoinByte(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			builder := &BuilderX{
+			builder := &Builder{
 				Builder: tt.fields.Builder,
 			}
 			got, err := builder.JoinByte(tt.args.bytes...)

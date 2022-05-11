@@ -23,13 +23,13 @@ import (
 	"github.com/openingo/godkits/array"
 )
 
-// BuilderX extend from strings.Builder
-type BuilderX struct {
+// Builder extend from strings.Builder
+type Builder struct {
 	strings.Builder
 }
 
 // JoinString to current builder
-func (builder *BuilderX) JoinString(strArray ...string) (int, error) {
+func (builder *Builder) JoinString(strArray ...string) (int, error) {
 	if array.Empty(strArray) {
 		return 0, nil
 	}
@@ -45,16 +45,9 @@ func (builder *BuilderX) JoinString(strArray ...string) (int, error) {
 }
 
 // JoinByte to current builder
-func (builder *BuilderX) JoinByte(bytes ...byte) (int, error) {
+func (builder *Builder) JoinByte(bytes ...byte) (int, error) {
 	if array.Empty(bytes) {
 		return 0, nil
 	}
-	total := 0
-	for _, c := range bytes {
-		if err := builder.WriteByte(c); err != nil {
-			return total, err
-		}
-		total += 1
-	}
-	return total, nil
+	return builder.JoinString(string(bytes))
 }
