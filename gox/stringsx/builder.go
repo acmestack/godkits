@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package stringx
+package stringsx
 
 import (
 	"strings"
@@ -45,6 +45,7 @@ func (builder *Builder) JoinString(strArray ...string) (int, error) {
 }
 
 // JoinByte to current builder
+// wrap JoinString
 func (builder *Builder) JoinByte(bytes ...byte) (int, error) {
 	if array.Empty(bytes) {
 		return 0, nil

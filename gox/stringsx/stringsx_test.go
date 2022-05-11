@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package stringx
+package stringsx
 
 import (
 	"reflect"

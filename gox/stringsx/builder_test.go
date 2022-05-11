@@ -15,14 +15,44 @@
  * limitations under the License.
  */
 
-package stringx
+package stringsx
 
 import (
 	"strings"
 	"testing"
 )
 
-func TestBuilderX_JoinString(t *testing.T) {
+func TestBuilder(t *testing.T) {
+	// go strings
+	stringsBuilder := strings.Builder{}
+	stringsBuilder.WriteString("hello")
+	stringsBuilder.WriteByte(' ')
+	stringsBuilder.WriteString("world")
+	stringsBuilder.Grow(123)
+
+	// gox stringsx
+	stringxBuilder := &Builder{
+		Builder: strings.Builder{},
+	}
+	stringxBuilder.JoinString("hello")
+	stringxBuilder.JoinByte(' ')
+	stringxBuilder.JoinString("world")
+	stringxBuilder.Grow(123)
+
+	if stringsBuilder.Cap() != stringxBuilder.Cap() {
+		t.Errorf("Cap() is not eq, stringsBuilder.Cap() = %d, stringxsBuilder.Cap() = %d", stringsBuilder.Cap(), stringxBuilder.Cap())
+	}
+
+	if stringsBuilder.Len() != stringxBuilder.Len() {
+		t.Errorf("Len() is not eq, stringsBuilder.Len() = %d, stringxsBuilder.Len() = %d", stringsBuilder.Len(), stringxBuilder.Len())
+	}
+
+	if stringsBuilder.String() != stringxBuilder.String() {
+		t.Errorf("String() is not eq, stringsBuilder.String() = %s, stringxsBuilder.String() = %s", stringsBuilder.String(), stringxBuilder.String())
+	}
+}
+
+func TestBuilder_JoinString(t *testing.T) {
 	type fields struct {
 		Builder strings.Builder
 	}
@@ -60,7 +90,7 @@ func TestBuilderX_JoinString(t *testing.T) {
 	}
 }
 
-func TestBuilderX_JoinByte(t *testing.T) {
+func TestBuilder_JoinByte(t *testing.T) {
 	type fields struct {
 		Builder strings.Builder
 	}
