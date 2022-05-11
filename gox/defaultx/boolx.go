@@ -24,7 +24,7 @@ import (
 // DefaultIfError if error use false
 func DefaultIfError(value bool, err error) bool {
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 		return false
 	}
 	return value

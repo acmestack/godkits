@@ -15,4 +15,33 @@
  * limitations under the License.
  */
 
-package unicodex
+package defaultx
+
+import "testing"
+
+func TestDefaultIfError(t *testing.T) {
+	type args struct {
+		value bool
+		err   error
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			args: args{
+				value: true,
+				err:   nil,
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := DefaultIfError(tt.args.value, tt.args.err); got != tt.want {
+				t.Errorf("DefaultIfError() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

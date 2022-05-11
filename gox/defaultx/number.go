@@ -22,7 +22,7 @@ import "log"
 // DefaultComplexIfError if error use defaultValue
 func DefaultComplexIfError(err error, value complex128, defaultValue complex128) complex128 {
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 		return defaultValue
 	}
 	return value
@@ -31,7 +31,7 @@ func DefaultComplexIfError(err error, value complex128, defaultValue complex128)
 // DefaultFloat64IfError if error use defaultValue
 func DefaultFloat64IfError(err error, value float64, defaultValue float64) float64 {
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 		return defaultValue
 	}
 	return value
@@ -40,7 +40,7 @@ func DefaultFloat64IfError(err error, value float64, defaultValue float64) float
 // DefaultIntIfError if error use defaultValue
 func DefaultIntIfError(err error, value int, defaultValue int) int {
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 		return defaultValue
 	}
 	return value
@@ -49,7 +49,7 @@ func DefaultIntIfError(err error, value int, defaultValue int) int {
 // DefaultUint64IfError if error use defaultValue
 func DefaultUint64IfError(err error, value uint64, defaultValue uint64) uint64 {
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 		return defaultValue
 	}
 	return value
