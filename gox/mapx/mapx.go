@@ -40,14 +40,14 @@ func (m *Map) ContainsKey(key any) bool {
 // Put key value to map
 func (m *Map) Put(key any, value any) bool {
 	checkMap(m)
-	m.kv[key] = value
 	if !m.ContainsKey(key) {
 		m.size++
 	}
+	m.kv[key] = value
 	return true
 }
 
-// Get value by key
+// Get value by key, may be nil
 func (m *Map) Get(key any) any {
 	checkMap(m)
 	return m.kv[key]

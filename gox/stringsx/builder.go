@@ -50,5 +50,12 @@ func (builder *Builder) JoinByte(bytes ...byte) (int, error) {
 	if array.Empty(bytes) {
 		return 0, nil
 	}
-	return builder.JoinString(string(bytes))
+	total := 0
+	for _, c := range bytes {
+		if err := builder.WriteByte(c); err != nil {
+			return total, err
+		}
+		total += 1
+	}
+	return total, nil
 }

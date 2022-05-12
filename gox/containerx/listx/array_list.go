@@ -23,8 +23,8 @@ import (
 	"github.com/openingo/godkits/array"
 )
 
-// DefaultArraylistSize the default array size 10
-const DefaultArraylistSize = 10
+// defaultArraylistSize the default array size 10
+const defaultArraylistSize = 10
 
 // Arraylist array lst
 type Arraylist struct {
@@ -35,7 +35,7 @@ type Arraylist struct {
 // New an array list
 func New(element ...any) *Arraylist {
 	lst := &Arraylist{}
-	lst.elements = make([]any, DefaultArraylistSize)
+	lst.elements = make([]any, defaultArraylistSize)
 	if len(element) > 0 {
 		lst.Add(element...)
 	}
