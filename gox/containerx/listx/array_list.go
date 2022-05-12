@@ -17,7 +17,11 @@
 
 package listx
 
-import "github.com/openingo/godkits/array"
+import (
+	"reflect"
+
+	"github.com/openingo/godkits/array"
+)
 
 // DefaultArraylistSize the default array size 10
 const DefaultArraylistSize = 10
@@ -52,8 +56,8 @@ func (lst *Arraylist) Add(element ...any) {
 	}
 }
 
-// Remove from array list at index
-func (lst *Arraylist) Remove(index int) any {
+// RemoveAtIndex from array list at index
+func (lst *Arraylist) RemoveAtIndex(index int) any {
 	if index < 0 || index >= lst.size {
 		return nil
 	}
@@ -63,6 +67,11 @@ func (lst *Arraylist) Remove(index int) any {
 	copy(lst.elements[index:], lst.elements[index+1:lst.size])
 	lst.size--
 	return current
+}
+
+// Remove from array list
+func (lst *Arraylist) Remove(element any) bool {
+	return reflect.DeepEqual(lst.RemoveAtIndex(lst.IndexOf(element)), element)
 }
 
 // Get element from array list at index
@@ -81,7 +90,7 @@ func (lst *Arraylist) IndexOf(element any) int {
 
 // Empty array list
 func (lst *Arraylist) Empty() bool {
-	return lst.Size() == 0 || array.Empty(lst.elements)
+	return lst == nil || lst.Size() == 0 || array.Empty(lst.elements)
 }
 
 // Size of array list

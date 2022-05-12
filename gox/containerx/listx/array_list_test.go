@@ -220,7 +220,7 @@ func TestArraylist_IndexOf(t *testing.T) {
 	}
 }
 
-func TestArraylist_Remove(t *testing.T) {
+func TestArraylist_RemoveAtIndex(t *testing.T) {
 	arrayList := &Arraylist{
 		elements: []any{"hello", "world"},
 		size:     2,
@@ -253,8 +253,8 @@ func TestArraylist_Remove(t *testing.T) {
 				elements: tt.fields.elements,
 				size:     tt.fields.size,
 			}
-			if got := lst.Remove(tt.args.index); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Remove() = %v, want %v", got, tt.want)
+			if got := lst.RemoveAtIndex(tt.args.index); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("RemoveAtIndex() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -364,6 +364,46 @@ func TestNew(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := New(tt.args.elements...); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("New() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestArraylist_Remove(t *testing.T) {
+	arrayList := &Arraylist{
+		elements: []any{"hello", "world"},
+		size:     2,
+	}
+	type fields struct {
+		elements []any
+		size     int
+	}
+	type args struct {
+		element any
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+		want   bool
+	}{
+		{
+			fields: fields{
+				elements: arrayList.elements,
+				size:     arrayList.size,
+			},
+			args: args{element: "hello"},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			lst := &Arraylist{
+				elements: tt.fields.elements,
+				size:     tt.fields.size,
+			}
+			if got := lst.Remove(tt.args.element); got != tt.want {
+				t.Errorf("Remove() = %v, want %v", got, tt.want)
 			}
 		})
 	}
