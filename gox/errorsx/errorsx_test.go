@@ -17,7 +17,10 @@
 
 package errorsx
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestErr(t *testing.T) {
 	type args struct {
@@ -37,6 +40,33 @@ func TestErr(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := Err(tt.args.message); (err != nil) != tt.wantErr {
 				t.Errorf("Err() error = %v, wantErr %v, logError %v", err, tt.wantErr, LogError(err))
+			}
+		})
+	}
+}
+
+func TestLogError(t *testing.T) {
+	type args struct {
+		err error
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr any
+	}{
+		{
+			args:    args{err: nil},
+			wantErr: nil,
+		},
+		{
+			args:    args{err: Err("error")},
+			wantErr: Err("error"),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := LogError(tt.args.err); !reflect.DeepEqual(err, tt.wantErr) {
+				t.Errorf("LogError() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

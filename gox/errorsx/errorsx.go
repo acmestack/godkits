@@ -25,7 +25,7 @@ import (
 // LogError call log.Fatalln
 func LogError(err error) error {
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 	return err
 }
