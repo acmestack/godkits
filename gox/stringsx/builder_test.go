@@ -72,6 +72,12 @@ func TestBuilder_JoinString(t *testing.T) {
 			want:    2,
 			wantErr: false,
 		},
+		{
+			fields:  fields{Builder: strings.Builder{}},
+			args:    args{strArray: nil},
+			want:    0,
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -109,6 +115,12 @@ func TestBuilder_JoinByte(t *testing.T) {
 			fields:  fields{Builder: strings.Builder{}},
 			args:    args{bytes: []byte{'a', 'b'}},
 			want:    2,
+			wantErr: false,
+		},
+		{
+			fields:  fields{Builder: strings.Builder{}},
+			args:    args{bytes: nil},
+			want:    0,
 			wantErr: false,
 		},
 	}

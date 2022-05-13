@@ -17,7 +17,11 @@
 
 package defaultx
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/openingo/godkits/gox/errorsx"
+)
 
 func TestDefaultIfError(t *testing.T) {
 	type args struct {
@@ -35,6 +39,13 @@ func TestDefaultIfError(t *testing.T) {
 				err:   nil,
 			},
 			want: true,
+		},
+		{
+			args: args{
+				value: true,
+				err:   errorsx.Err("error"),
+			},
+			want: false,
 		},
 	}
 	for _, tt := range tests {

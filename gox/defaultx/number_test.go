@@ -42,6 +42,14 @@ func TestDefaultComplexIfError(t *testing.T) {
 			},
 			want: 123,
 		},
+		{
+			args: args{
+				err:          errorsx.Err("error"),
+				value:        123,
+				defaultValue: 12,
+			},
+			want: 12,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -70,6 +78,14 @@ func TestDefaultFloat64IfError(t *testing.T) {
 				defaultValue: 0.123,
 			},
 			want: 0.123,
+		},
+		{
+			args: args{
+				err:          nil,
+				value:        1.12,
+				defaultValue: 0.123,
+			},
+			want: 1.12,
 		},
 	}
 	for _, tt := range tests {
@@ -100,6 +116,14 @@ func TestDefaultIntIfError(t *testing.T) {
 			},
 			want: 123,
 		},
+		{
+			args: args{
+				err:          errorsx.Err("error"),
+				value:        123,
+				defaultValue: 12,
+			},
+			want: 12,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -128,6 +152,14 @@ func TestDefaultUint64IfError(t *testing.T) {
 				defaultValue: 123,
 			},
 			want: 123,
+		},
+		{
+			args: args{
+				err:          errorsx.Err("error"),
+				value:        123,
+				defaultValue: 12,
+			},
+			want: 12,
 		},
 	}
 	for _, tt := range tests {

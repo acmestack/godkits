@@ -18,6 +18,7 @@
 package aesx
 
 import (
+	"crypto/aes"
 	"reflect"
 	"testing"
 )
@@ -68,13 +69,13 @@ func TestDecrypt(t *testing.T) {
 	}
 
 	k := []byte(key)
-	encrypt, err := Encrypt([]byte("zcq"), k)
+	encrypt, _ := Encrypt([]byte("zcq"), k)
 
 	tests := []struct {
 		name    string
 		args    args
 		want    []byte
-		wantErr bool
+		wantErr any
 	}{
 		{
 			args: args{
@@ -82,13 +83,21 @@ func TestDecrypt(t *testing.T) {
 				key:       k,
 			},
 			want:    []byte("zcq"),
-			wantErr: err != nil,
+			wantErr: nil,
+		},
+		{
+			args: args{
+				encrypted: encrypt,
+				key:       nil,
+			},
+			want:    nil,
+			wantErr: aes.KeySizeError(0),
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := Decrypt(tt.args.encrypted, tt.args.key)
-			if (err != nil) != tt.wantErr {
+			if !reflect.DeepEqual(err, tt.wantErr) {
 				t.Errorf("Decrypt() err = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
@@ -106,13 +115,13 @@ func TestEncrypt(t *testing.T) {
 	}
 
 	k := []byte(key)
-	encrypt, err := Encrypt([]byte("zcq"), k)
+	encrypt, _ := Encrypt([]byte("zcq"), k)
 
 	tests := []struct {
 		name    string
 		args    args
 		want    []byte
-		wantErr bool
+		wantErr any
 	}{
 		{
 			args: args{
@@ -120,13 +129,21 @@ func TestEncrypt(t *testing.T) {
 				key:        k,
 			},
 			want:    encrypt,
-			wantErr: err != nil,
+			wantErr: nil,
+		},
+		{
+			args: args{
+				originData: []byte("zcq"),
+				key:        nil,
+			},
+			want:    nil,
+			wantErr: aes.KeySizeError(0),
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := Encrypt(tt.args.originData, tt.args.key)
-			if (err != nil) != tt.wantErr {
+			if !reflect.DeepEqual(err, tt.wantErr) {
 				t.Errorf("Encrypt() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}

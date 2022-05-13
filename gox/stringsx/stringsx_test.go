@@ -39,6 +39,10 @@ func TestAnyEmpty(t *testing.T) {
 			args: args{str: []string{"hello world"}},
 			want: false,
 		},
+		{
+			args: args{str: nil},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -117,6 +121,10 @@ func TestToInt(t *testing.T) {
 			args: args{str: "123"},
 			want: 123,
 		},
+		{
+			args: args{str: ""},
+			want: 0,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -139,6 +147,10 @@ func TestToBytes(t *testing.T) {
 		{
 			args: args{str: "123"},
 			want: []byte("123"),
+		},
+		{
+			args: args{str: ""},
+			want: nil,
 		},
 	}
 	for _, tt := range tests {
@@ -163,6 +175,10 @@ func TestToComplex(t *testing.T) {
 			args: args{str: "123"},
 			want: 123,
 		},
+		{
+			args: args{str: ""},
+			want: 0,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -185,6 +201,10 @@ func TestToFloat64(t *testing.T) {
 		{
 			args: args{str: "0.001"},
 			want: 0.001,
+		},
+		{
+			args: args{str: ""},
+			want: 0.0,
 		},
 	}
 	for _, tt := range tests {
@@ -221,6 +241,10 @@ func TestToBool(t *testing.T) {
 			args: args{str: "f"},
 			want: false,
 		},
+		{
+			args: args{str: ""},
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -247,6 +271,13 @@ func TestToUnit(t *testing.T) {
 				base: 10,
 			},
 			want: 10,
+		},
+		{
+			args: args{
+				str:  "",
+				base: 10,
+			},
+			want: 0,
 		},
 	}
 	for _, tt := range tests {
