@@ -166,6 +166,22 @@ func TestArraylist_Get(t *testing.T) {
 			args: args{index: 0},
 			want: "hello",
 		},
+		{
+			fields: fields{
+				elements: arrayList.elements,
+				size:     arrayList.size,
+			},
+			args: args{index: -1},
+			want: nil,
+		},
+		{
+			fields: fields{
+				elements: arrayList.elements,
+				size:     arrayList.size,
+			},
+			args: args{index: 10},
+			want: nil,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -245,6 +261,22 @@ func TestArraylist_RemoveAtIndex(t *testing.T) {
 			},
 			args: args{index: 0},
 			want: "hello",
+		},
+		{
+			fields: fields{
+				elements: arrayList.elements,
+				size:     arrayList.size,
+			},
+			args: args{index: -1},
+			want: nil,
+		},
+		{
+			fields: fields{
+				elements: arrayList.elements,
+				size:     arrayList.size,
+			},
+			args: args{index: 10},
+			want: nil,
 		},
 	}
 	for _, tt := range tests {
