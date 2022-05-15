@@ -1,0 +1,31 @@
+name: build docs
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: building
+        uses: ZanderZhao/gitbook-action@v1.2.4
+        with:
+          token: ${{ secrets.GITBOOK_ACTION_TOKEN }}
+          source_edit_time: true
+          source_branch: docs
+          source_dir: docs
+          publish_push_force: true
+          publish_commit_history: false # just last commit
+          publish_commit_message: ${{ github.event.head_commit.message }}
+          gitbook_pdf: true
+          gitbook_pdf_dir: ebooks
+          gitbook_pdf_name: godkits
+          gitbook_epub: true
+          gitbook_epub_dir: ebooks
+          gitbook_epub_name: godkits
+          gitbook_mobi: true
+          gitbook_mobi_dir: ebooks
+          gitbook_mobi_name: godkits
+          font_install: sudo apt-get install fonts-noto-cjk
+          
+          
+
