@@ -1,7 +1,9 @@
 name: build docs
-on: push
+on:
+  push:
+    branches: [ docs ]
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - name: Git checkout
@@ -25,6 +27,3 @@ jobs:
           gitbook_mobi_dir: ebooks
           gitbook_mobi_name: godkits
           font_install: sudo apt-get install fonts-noto-cjk
-          
-          
-
