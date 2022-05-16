@@ -1,7 +1,9 @@
 name: build docs
-on: push
+on:
+  push:
+    branches: [ docs ]
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - name: Git checkout
@@ -14,7 +16,6 @@ jobs:
           source_branch: docs
           source_dir: docs
           publish_push_force: true
-          publish_commit_history: false # just last commit
           publish_commit_message: ${{ github.event.head_commit.message }}
           gitbook_pdf: true
           gitbook_pdf_dir: ebooks
