@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [stringsx](stringsx/README.md)
-
-## [stringsx](stringsx/stringsx.md)
+* Go SDK Extensions
+  * [stringsx](stringsx/README.md)
 
