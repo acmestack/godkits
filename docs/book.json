@@ -15,7 +15,9 @@
         "favicon@^0.0.2",
         "tbfed-pagefooter@^0.0.1",
         "theme-default",
-        "-highlight", "prism", "prism-themes"
+        "-highlight", "prism", "prism-themes",
+        "-sharing",
+        "popup"
     ],
     "pluginsConfig": {
         "theme-default": {
@@ -37,7 +39,7 @@
             "size": "small"
         },
         "tbfed-pagefooter": {
-            "copyright": "<a href=https://openingo.org>OpeningGO</a>",
+            "copyright": "Copyright &copy <a href=https://openingo.org>OpeningGO</a>",
             "modify_label": " Updated at ",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         },
