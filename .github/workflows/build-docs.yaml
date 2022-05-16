@@ -2,10 +2,8 @@ name: build docs
 on:
   push:
     branches: [ docs ]
-  pull_request:
-    branches: [ docs ]
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-18.04
     steps:
       - name: Git checkout
