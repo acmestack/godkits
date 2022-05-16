@@ -1,5 +1,9 @@
 name: build docs
-on: push
+on:
+  push:
+    branches: [ docs ]
+  pull_request:
+    branches: [ docs ]
 jobs:
   deploy:
     runs-on: ubuntu-18.04
