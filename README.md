@@ -1,4 +1,6 @@
-# how to create docs?
+# How to create docs?
+
+[![build docs](https://github.com/openingo/godkits/actions/workflows/build-docs.yaml/badge.svg)](https://github.com/openingo/godkits/actions/workflows/build-docs.yaml)
 
 - fork this repo, ref [this](https://github.com/openingo/.github#how-to-contribute)
 - write api docs in `docs` path
