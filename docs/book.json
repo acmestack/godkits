@@ -1,0 +1,61 @@
+{
+    "description": "godkits",
+    "language": "en",
+    "author": "OpeningGO",
+    "plugins": [
+        "github",
+        "codesnippet",
+        "splitter",
+        "page-toc-button",
+        "image-captions",
+        "editlink",
+        "back-to-top-button",
+        "-lunr", "-search", "search-plus",
+        "github-buttons@2.1.0",
+        "favicon@^0.0.2",
+        "tbfed-pagefooter@^0.0.1",
+        "theme-default",
+        "-highlight", "prism", "prism-themes",
+        "sitemap-general",
+        "lightbox",
+        "copy-code-button",
+        "alerts"
+    ],
+    "pluginsConfig": {
+        "theme-default": {
+            "showLevel": false
+        },
+        "github": {
+            "url": "https://github.com/openingo/godkits"
+        },
+        "editlink": {
+            "base": "https://github.com/openingo/godkits/blob/main/",
+            "label": "edit this page"
+        },
+        "image-captions": {
+            "caption": "images - _CAPTION_"
+        },
+        "github-buttons": {
+            "repo": "openingo/godkits",
+            "types": ["star"],
+            "size": "small"
+        },
+        "tbfed-pagefooter": {
+            "copyright": "<a href=https://openingo.org>OpeningGO</a>",
+            "modify_label": " Updated at ",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "favicon": {
+            "shortcut": "favicon.ico",
+            "bookmark": "favicon.ico"
+        },
+        "prism": {
+            "css": [
+            "prism-themes/themes/prism-ghcolors.css"
+            ]
+        },
+        "sitemap-general": {
+            "prefix": "https://openingo.org/godkits"
+        }
+    }
+}
