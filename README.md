@@ -5,6 +5,7 @@
 [![go report](https://goreportcard.com/badge/github.com/openingo/godkits)](https://goreportcard.com/report/github.com/openingo/godkits)
 [![codecov report](https://codecov.io/gh/openingo/godkits/branch/main/graph/badge.svg)](https://codecov.io/gh/openingo/godkits)
 [![workflow](https://github.com/openingo/godkits/actions/workflows/go.yml/badge.svg?event=push)](#)
+[![build docs](https://github.com/openingo/godkits/actions/workflows/build-docs.yaml/badge.svg)](https://github.com/openingo/godkits/actions/workflows/build-docs.yaml)
 [![lasted release](https://img.shields.io/github/v/release/openingo/godkits?label=lasted)](https://github.com/openingo/godkits/releases)
 
 
