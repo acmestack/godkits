@@ -45,7 +45,7 @@ func TestJsonBytesToAny(t *testing.T) {
 		{
 			name: "json bytes to any",
 			args: args{
-				bytes: []byte("{\"name\":\"qicz\",\"age\":1123}"),
+				bytes: []byte("{\"name\":\"qicz\",\"age\":123}"),
 				v:     &user{},
 			},
 			wantErr: false,
