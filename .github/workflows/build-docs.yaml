@@ -15,7 +15,7 @@ jobs:
           source_edit_time: true
           source_branch: docs
           source_dir: docs
-          pubblish_branch: docs-site
+          publish_branch: docs-site
           publish_push_force: true
           publish_commit_message: ${{ github.event.head_commit.message }}
           gitbook_pdf: true
