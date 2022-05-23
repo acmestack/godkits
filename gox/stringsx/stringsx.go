@@ -19,6 +19,7 @@ package stringsx
 
 import (
 	"strconv"
+	"strings"
 
 	"github.com/openingo/godkits/gox/defaultx"
 )
@@ -30,7 +31,7 @@ func NotEmpty(str string) bool {
 
 // Empty string
 func Empty(str string) bool {
-	return str == ""
+	return str == "" || len(Trim(str)) == 0
 }
 
 // NoneEmpty strings
@@ -44,7 +45,7 @@ func AnyEmpty(str ...string) bool {
 		return true
 	}
 	for _, one := range str {
-		if one == "" {
+		if Empty(one) {
 			return true
 		}
 	}
@@ -117,4 +118,9 @@ func ToBytes(str string) []byte {
 		return nil
 	}
 	return []byte(str)
+}
+
+// Trim the " " cutset
+func Trim(str string) string {
+	return strings.Trim(str, " ")
 }
