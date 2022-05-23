@@ -43,6 +43,10 @@ func TestAnyEmpty(t *testing.T) {
 			args: args{str: nil},
 			want: true,
 		},
+		{
+			args: args{str: []string{" "}},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
