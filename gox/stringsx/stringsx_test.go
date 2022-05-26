@@ -47,6 +47,10 @@ func TestAnyEmpty(t *testing.T) {
 			args: args{str: []string{" "}},
 			want: true,
 		},
+		{
+			args: args{str: []string{" ", "  "}},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -334,6 +338,31 @@ func TestEmpty(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Empty(tt.args.str); got != tt.want {
 				t.Errorf("Empty() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestReplaceAll(t *testing.T) {
+	type args struct {
+		str string
+		old string
+		new string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{str: "hth test", old: "test", new: "want"},
+			want: "hth want",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ReplaceAll(tt.args.str, tt.args.old, tt.args.new); got != tt.want {
+				t.Errorf("replaceAll() = %v, want %v", got, tt.want)
 			}
 		})
 	}

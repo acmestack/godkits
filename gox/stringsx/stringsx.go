@@ -124,3 +124,11 @@ func ToBytes(str string) []byte {
 func Trim(str string) string {
 	return strings.Trim(str, " ")
 }
+
+// ReplaceAll Replace all old in str with new
+func ReplaceAll(str string, old string, new string) string {
+	if AnyEmpty(str, old, new) {
+		return str
+	}
+	return strings.ReplaceAll(str, old, new)
+}
