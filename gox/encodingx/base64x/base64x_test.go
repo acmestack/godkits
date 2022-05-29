@@ -69,3 +69,59 @@ func TestBase64DecodeToBytes(t *testing.T) {
 		})
 	}
 }
+
+func TestBase64URLEncodeToString(t *testing.T) {
+	tests := []struct {
+		msg  []byte
+		want string
+	}{
+		{
+			msg:  []byte("https://openingo.org/"),
+			want: "aHR0cHM6Ly9vcGVuaW5nby5vcmcv",
+		},
+		{
+			msg:  []byte("https://openingo.org?name=moremind"),
+			want: "aHR0cHM6Ly9vcGVuaW5nby5vcmc_bmFtZT1tb3JlbWluZA==",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(string(tt.msg), func(t *testing.T) {
+			result := Base64URLEncodeToString(tt.msg)
+			if result != tt.want {
+				t.Errorf("Base64URLEncodeToString() result = %v, want %v", result, tt.want)
+			}
+		})
+	}
+}
+
+func TestBase64URLDecodeToByte(t *testing.T) {
+	tests := []struct {
+		msg     string
+		want    []byte
+		wantErr any
+	}{
+		{
+			msg:     "aHR0cHM6Ly9vcGVuaW5nby5vcmcv",
+			want:    []byte("https://openingo.org/"),
+			wantErr: false,
+		},
+		{
+			msg:     "aHR0cHM6Ly9vcGVuaW5nby5vcmc_bmFtZT1tb3JlbWluZA==",
+			want:    []byte("https://openingo.org?name=moremind"),
+			wantErr: false,
+		},
+		// TODO moremind add error test cases
+	}
+	for _, tt := range tests {
+		t.Run(tt.msg, func(t *testing.T) {
+			result, err := Base64URLDecodeToByte(tt.msg)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Base64URLDecodeToByte() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if string(result) != string(tt.want) {
+				t.Errorf("Base64URLDecodeToByte() result = %v, want %v", result, tt.want)
+			}
+		})
+	}
+}
