@@ -19,6 +19,7 @@ package stringsx
 
 import (
 	"strconv"
+	"strings"
 
 	"github.com/openingo/godkits/gox/defaultx"
 )
@@ -30,7 +31,7 @@ func NotEmpty(str string) bool {
 
 // Empty string
 func Empty(str string) bool {
-	return str == ""
+	return str == "\n" || str == "\t" || str == "" || len(Trim(str)) == 0
 }
 
 // NoneEmpty strings
@@ -44,7 +45,7 @@ func AnyEmpty(str ...string) bool {
 		return true
 	}
 	for _, one := range str {
-		if one == "" {
+		if Empty(one) {
 			return true
 		}
 	}
@@ -117,4 +118,143 @@ func ToBytes(str string) []byte {
 		return nil
 	}
 	return []byte(str)
+}
+
+// Trim the " " cutset
+func Trim(str string) string {
+	return strings.Trim(str, " ")
+}
+
+// ReplaceAll Replace all old in str with new
+func ReplaceAll(str string, old string, new string) string {
+	if AnyEmpty(str, old, new) {
+		return str
+	}
+	return strings.ReplaceAll(str, old, new)
+}
+
+// StripBlank Deletes leading and trailing whitespace characters
+/*
+ * <p>Strips whitespace from the start and end of a String.</p>
+ *
+ * <p>This is similar to {@link Trim(String)} but removes whitespace.
+ * Whitespace is defined by {@link Empty(char)}.</p>
+ *
+ * <pre>
+ * StripBlank("")       = ""
+ * StripBlank("   ")    = ""
+ * StripBlank("abc")    = "abc"
+ * StripBlank("  abc")  = "abc"
+ * StripBlank("abc  ")  = "abc"
+ * StripBlank(" abc ")  = "abc"
+ * StripBlank(" ab c ") = "ab c"
+ * </pre>
+ */
+func StripBlank(str string) string {
+	return Strip(str, "")
+}
+
+// Strip Delete the characters that start and end with stripChars
+/*
+ * <p>Strips any of a set of characters from the start and end of a String.
+ * This is similar to {@link String#trim()} but allows the characters
+ * to be stripped to be controlled.</p>
+ *
+ * <p>A {@code  EmptyStr} input String returns {@code  EmptyStr}.
+ * An empty string ("") input returns the empty string.</p>
+ *
+ * <p>If the stripChars String is {@code  blank}, whitespace is
+ * stripped as defined by {@link Empty(char)}
+ *
+ * <pre>
+ * Strip("", *)            = ""
+ * Strip("abc", "")      = "abc"
+ * Strip("  abc", "")    = "abc"
+ * Strip("abc  ", "")    = "abc"
+ * Strip(" abc ", "")    = "abc"
+ * Strip("  abcyx", "xyz") = "  abc"
+ * </pre>
+ */
+func Strip(str string, stripChars string) string {
+	if Empty(str) {
+		return str
+	}
+	str = StripStart(str, stripChars)
+	return StripEnd(str, stripChars)
+}
+
+// StripStart Delete the characters that start with stripChars
+/*
+ * <p>Strips any of a set of characters from the start of a String.</p>
+ *
+ * <p>A {@code EmptyStr} input String returns {@code EmptyStr}.
+ * An empty string ("") input returns the empty string.</p>
+ *
+ * <p>If the stripChars String is {@code EmptyStr}, whitespace is
+ * stripped as defined by {@link Empty(char)}.</p>
+ *
+ * <pre>
+ * StripStart("", *)            = ""
+ * StripStart("abc", "")        = "abc"
+ * StripStart("abc", "")      = "abc"
+ * StripStart("  abc", "")    = "abc"
+ * StripStart("abc  ", "")    = "abc  "
+ * StripStart(" abc ", "")    = "abc "
+ * StripStart("yxabc  ", "xyz") = "abc  "
+ * </pre>
+ */
+func StripStart(str string, stripChars string) string {
+	if Empty(str) {
+		return str
+	}
+	start := 0
+	strlen := len(str)
+	if Empty(stripChars) {
+		for start != strlen && Empty(string(str[start])) {
+			start++
+		}
+	} else {
+		for start != strlen && strings.Contains(stripChars, string(str[start])) {
+			start++
+		}
+	}
+	return str[start:]
+}
+
+// StripEnd Delete the characters that end with stripChars
+/*
+ * <p>Strips any of a set of characters from the end of a String.</p>
+ *
+ * <p>A {@code EmptyStr} input String returns {@code EmptyStr}.
+ * An empty string ("") input returns the empty string.</p>
+ *
+ * <p>If the stripChars String is {@code EmptyStr}, whitespace is
+ * stripped as defined by {@link Empty(char)}.</p>
+ *
+ * <pre>
+ * StripEnd("", *)            = ""
+ * StripEnd("abc", "")        = "abc"
+ * StripEnd("abc", null)      = "abc"
+ * StripEnd("  abc", null)    = "  abc"
+ * StripEnd("abc  ", null)    = "abc"
+ * StripEnd(" abc ", null)    = " abc"
+ * StripEnd("  abcyx", "xyz") = "  abc"
+ * StripEnd("120.00", ".0")   = "12"
+ * </pre>
+ */
+func StripEnd(str string, stripChars string) string {
+	if Empty(str) {
+		return str
+	}
+	end := len(str)
+	if Empty(stripChars) {
+		for end != 0 && Empty(string(str[end-1])) {
+			end--
+		}
+	} else {
+		for end != 0 && strings.Contains(stripChars, string(str[end-1])) {
+			end--
+		}
+	}
+	return str[:end]
 }

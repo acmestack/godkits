@@ -43,6 +43,14 @@ func TestAnyEmpty(t *testing.T) {
 			args: args{str: nil},
 			want: true,
 		},
+		{
+			args: args{str: []string{" "}},
+			want: true,
+		},
+		{
+			args: args{str: []string{" ", "  "}},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -330,6 +338,126 @@ func TestEmpty(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := Empty(tt.args.str); got != tt.want {
 				t.Errorf("Empty() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestReplaceAll(t *testing.T) {
+	type args struct {
+		str string
+		old string
+		new string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{str: "hth test", old: "test", new: "want"},
+			want: "hth want",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ReplaceAll(tt.args.str, tt.args.old, tt.args.new); got != tt.want {
+				t.Errorf("replaceAll() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStripBlank(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{str: "  ab c 	"},
+			want: "ab c",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := StripBlank(tt.args.str); got != tt.want {
+				t.Errorf("StripBlank() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStrip(t *testing.T) {
+	type args struct {
+		str        string
+		stripChars string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{str: "[{a12321a}]", stripChars: "[]"},
+			want: "{a12321a}",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Strip(tt.args.str, tt.args.stripChars); got != tt.want {
+				t.Errorf("Strip() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStripStart(t *testing.T) {
+	type args struct {
+		str        string
+		stripChars string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{str: "yxabc  ", stripChars: "xyz"},
+			want: "abc  ",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := StripStart(tt.args.str, tt.args.stripChars); got != tt.want {
+				t.Errorf("StripStart() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestStripEnd(t *testing.T) {
+	type args struct {
+		str        string
+		stripChars string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{str: "120.00", stripChars: ".0"},
+			want: "12",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := StripEnd(tt.args.str, tt.args.stripChars); got != tt.want {
+				t.Errorf("StripEnd() = %v, want %v", got, tt.want)
 			}
 		})
 	}
