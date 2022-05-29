@@ -30,3 +30,24 @@ func Base64EncodeToString(input []byte) string {
 func Base64DecodeToBytes(src string) ([]byte, error) {
 	return base64.StdEncoding.DecodeString(src)
 }
+
+// Base64URLEncodeToString convert url byte to string
+// wrap base64.URLEncoding.EncodeToString
+func Base64URLEncodeToString(src []byte) string {
+	return base64.URLEncoding.EncodeToString(src)
+}
+
+// Base64URLDecodeToByte convert string to byte
+func Base64URLDecodeToByte(src string) ([]byte, error) {
+	return base64.URLEncoding.DecodeString(src)
+}
+
+// Base64RawEncodeToString convert raw to string
+func Base64RawEncodeToString(src []byte) string {
+	return base64.RawStdEncoding.EncodeToString(src)
+}
+
+// Base64RawDecodeToByte convert raw string to byte
+func Base64RawDecodeToByte(src string) ([]byte, error) {
+	return base64.RawStdEncoding.DecodeString(src)
+}
