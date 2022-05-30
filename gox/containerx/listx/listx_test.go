@@ -123,3 +123,26 @@ func TestNotEmpty(t *testing.T) {
 		})
 	}
 }
+func TestListx_ForEach(t *testing.T) {
+	type args struct {
+		fn func(any)
+	}
+	fn := func(val any) { t.Log(val) }
+	lst := &Listx{List: *list.New()}
+	lst.PushBack("hello")
+	lst.PushBack("world")
+	tests := []struct {
+		name string
+		lst  *Listx
+		args args
+	}{
+		{lst: nil, args: args{fn: fn}, name: "nil"},
+		{lst: &Listx{List: *list.New()}, args: args{fn: fn}, name: "empty"},
+		{lst: lst, args: args{fn: fn}, name: "not empty"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.lst.ForEach(tt.args.fn)
+		})
+	}
+}

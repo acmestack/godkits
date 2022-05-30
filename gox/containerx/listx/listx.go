@@ -43,3 +43,14 @@ func Empty(lst *list.List) bool {
 func (lst *Listx) Empty() bool {
 	return lst.Len() == 0
 }
+
+// ForEach iterates over the list, calling fn on each element.
+func (lst *Listx) ForEach(fn func(any)) {
+	if lst == nil || fn == nil {
+		return
+	}
+
+	for e := lst.Front(); e != nil; e = e.Next() {
+		fn(e.Value)
+	}
+}
