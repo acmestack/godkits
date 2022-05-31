@@ -1,3 +1,12 @@
 {
-   "signedContributors": []
+  "signedContributors": [
+    {
+      "name": "qicz",
+      "id": 2174082,
+      "comment_id": 1141754418,
+      "created_at": "2022-05-31T07:16:26Z",
+      "repoId": 487301318,
+      "pullRequestNo": 72
+    }
+  ]
 }
