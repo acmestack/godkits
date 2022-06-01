@@ -17,14 +17,22 @@
 
 package hexx
 
-import "encoding/hex"
+import (
+	"encoding/hex"
+)
 
 // HexEncodeToString convert bytes to string
 func HexEncodeToString(src []byte) string {
 	return hex.EncodeToString(src)
 }
 
-// HexDecodeToString build string to hex bytes
-func HexDecodeToString(src string) ([]byte, error) {
+// HexDecodeToBytes build string to hex bytes
+func HexDecodeToBytes(src string) ([]byte, error) {
 	return hex.DecodeString(src)
+}
+
+// HexDump build bytes dump to hex string
+// actually, hex dump can do anything
+func HexDump(src []byte) string {
+	return hex.Dump(src)
 }
