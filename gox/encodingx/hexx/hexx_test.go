@@ -19,7 +19,7 @@ package hexx
 
 import "testing"
 
-// test hex encode to string
+// test hex encode to string.
 func TestHexEncodeToString(t *testing.T) {
 	tests := []struct {
 		msg  []byte
@@ -44,7 +44,7 @@ func TestHexEncodeToString(t *testing.T) {
 	}
 }
 
-// test hex decode to string
+// test hex decode to string.
 func TestHexDecodeToString(t *testing.T) {
 	tests := []struct {
 		msg     string
@@ -76,13 +76,16 @@ func TestHexDecodeToString(t *testing.T) {
 	}
 }
 
+// test hex dump.
+// please see ascii code with result.
 func TestHexDump(t *testing.T) {
 	tests := []struct {
 		msg  []byte
 		want string
 	}{
 		{
-			msg:  []byte("moremind"),
+			msg: []byte("moremind"),
+			// 6d -> m, 6f -> o, 72 -> o, 65 -> e, 69 -> i, 6e -> n, 64 -> d
 			want: "00000000  6d 6f 72 65 6d 69 6e 64                           |moremind|\n",
 		},
 		{
