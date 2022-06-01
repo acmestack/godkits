@@ -94,7 +94,7 @@ func TestHexDump(t *testing.T) {
 		t.Run(string(tt.msg), func(t *testing.T) {
 			result := HexDump(tt.msg)
 			if result != tt.want {
-				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+				t.Errorf("HexDump() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
