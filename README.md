@@ -10,7 +10,7 @@
 [![lasted release](https://img.shields.io/github/v/release/openingo/godkits?label=lasted)](https://github.com/openingo/godkits/releases)
 
 
-the development toolkits of go
+the golang development toolkits.
 
 ## Naming
 
