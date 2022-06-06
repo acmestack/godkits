@@ -34,6 +34,15 @@ func EncodeBytesToString(src []byte) string {
 }
 
 // EncodeToBytes base method convert byte array encode to byte array
+/*
+ * <pre>
+ * dst := new byte("I am moremind")
+ * src := new byte("4920616d206d6f72656d696e64")
+ * hextable := "0123456789abcdef"
+ * EncodeToBytes(dst, src, hextable) = len(src) * 2 = 26
+ * </pre>
+ *
+ */
 func EncodeToBytes(dst, src []byte, hextable string) int {
 	j := 0
 	for _, v := range src {
@@ -45,6 +54,14 @@ func EncodeToBytes(dst, src []byte, hextable string) int {
 }
 
 // EncodeToCaseBytes base method, encode bytes to upper or lower case bytes
+/*
+ * <pre>
+ * src := []byte("nd");
+ * EncodeToCaseBytes(src, true)  = []byte("6e64")
+ * EncodeToCaseBytes(src, false) = []byte("6E64")
+ * </pre>
+ *
+ */
 func EncodeToCaseBytes(src []byte, toLowerCase bool) []byte {
 	dst := make([]byte, hex.EncodedLen(len(src)))
 	if toLowerCase {
@@ -57,7 +74,7 @@ func EncodeToCaseBytes(src []byte, toLowerCase bool) []byte {
 
 // EncodeToCaseString encode byte to upper or lower case string
 func EncodeToCaseString(src []byte, toLowerCase bool) string {
-	// TODO optimze use Pointer generate string
+	// TODO optimize use Pointer generate string
 	return string(EncodeToCaseBytes(src, toLowerCase))
 }
 

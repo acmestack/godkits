@@ -71,7 +71,7 @@ func TestEncodeToBytes(t *testing.T) {
 		t.Run(string(tt.src), func(t *testing.T) {
 			result := EncodeToBytes(tt.dst, tt.src, tt.hextable)
 			if result != tt.want {
-				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+				t.Errorf("EncodeToBytes() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
@@ -99,7 +99,7 @@ func TestEncodeToCaseBytes(t *testing.T) {
 		t.Run(string(tt.src), func(t *testing.T) {
 			result := EncodeToCaseBytes(tt.src, tt.toLowerCase)
 			if string(result) != string(tt.want) {
-				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+				t.Errorf("EncodeToCaseBytes() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
@@ -127,7 +127,7 @@ func TestEncodeToCaseString(t *testing.T) {
 		t.Run(string(tt.src), func(t *testing.T) {
 			result := EncodeToCaseString(tt.src, tt.toLowerCase)
 			if result != tt.want {
-				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+				t.Errorf("EncodeToCaseString() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
@@ -155,7 +155,7 @@ func TestEncodeToHexString(t *testing.T) {
 		t.Run(tt.src, func(t *testing.T) {
 			result := EncodeToHexString(tt.src, tt.toLowerCase)
 			if result != tt.want {
-				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+				t.Errorf("EncodeToHexString() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
