@@ -72,9 +72,3 @@ func EncodeToHexString(src string, toLowerCase bool) string {
 func HexDecodeToBytes(src string) ([]byte, error) {
 	return hex.DecodeString(src)
 }
-
-// HexDump build bytes dump to hex string
-// actually, hex dump can do anything
-func HexDump(src []byte) string {
-	return hex.Dump(src)
-}

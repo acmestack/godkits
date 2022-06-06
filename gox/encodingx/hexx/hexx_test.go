@@ -21,7 +21,7 @@ import (
 	"testing"
 )
 
-// test hex encode to string.
+// TestHexEncodeToString test hex encode to string.
 func TestHexEncodeToString(t *testing.T) {
 	tests := []struct {
 		msg  []byte
@@ -46,6 +46,7 @@ func TestHexEncodeToString(t *testing.T) {
 	}
 }
 
+// TestEncodeToBytes base method testcase, encode to bytes
 func TestEncodeToBytes(t *testing.T) {
 	tests := []struct {
 		dst      []byte
@@ -76,7 +77,7 @@ func TestEncodeToBytes(t *testing.T) {
 	}
 }
 
-// test encode bytes to upper or lower case bytes
+// TestEncodeToCaseBytes test encode bytes to upper or lower case bytes
 func TestEncodeToCaseBytes(t *testing.T) {
 	tests := []struct {
 		src         []byte
@@ -104,7 +105,7 @@ func TestEncodeToCaseBytes(t *testing.T) {
 	}
 }
 
-// test encode bytes to upper or lower case string
+// TestEncodeToCaseString test encode bytes to upper or lower case string
 func TestEncodeToCaseString(t *testing.T) {
 	tests := []struct {
 		src         []byte
@@ -132,6 +133,7 @@ func TestEncodeToCaseString(t *testing.T) {
 	}
 }
 
+// TestEncodeToHexString encode string to hex string
 func TestEncodeToHexString(t *testing.T) {
 	tests := []struct {
 		src         string
@@ -160,7 +162,7 @@ func TestEncodeToHexString(t *testing.T) {
 
 }
 
-// test hex decode to string.
+// TestHexDecodeToString test hex decode to string.
 func TestHexDecodeToString(t *testing.T) {
 	tests := []struct {
 		msg     string
@@ -187,33 +189,6 @@ func TestHexDecodeToString(t *testing.T) {
 			}
 			if string(result) != string(tt.want) {
 				t.Errorf("HexDecodeToBytes() result = %v, want %v", result, tt.want)
-			}
-		})
-	}
-}
-
-// test hex dump.
-// please see ascii code with result.
-func TestHexDump(t *testing.T) {
-	tests := []struct {
-		msg  []byte
-		want string
-	}{
-		{
-			msg: []byte("moremind"),
-			// 6d -> m, 6f -> o, 72 -> o, 65 -> e, 69 -> i, 6e -> n, 64 -> d
-			want: "00000000  6d 6f 72 65 6d 69 6e 64                           |moremind|\n",
-		},
-		{
-			msg:  []byte("hello,OpeningO"),
-			want: "00000000  68 65 6c 6c 6f 2c 4f 70  65 6e 69 6e 67 4f        |hello,OpeningO|\n",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(string(tt.msg), func(t *testing.T) {
-			result := HexDump(tt.msg)
-			if result != tt.want {
-				t.Errorf("HexDump() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
