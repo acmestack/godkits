@@ -17,7 +17,9 @@
 
 package hexx
 
-import "testing"
+import (
+	"testing"
+)
 
 // test hex encode to string.
 func TestHexEncodeToString(t *testing.T) {
@@ -36,12 +38,126 @@ func TestHexEncodeToString(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(string(tt.msg), func(t *testing.T) {
-			result := HexEncodeToString(tt.msg)
+			result := EncodeBytesToString(tt.msg)
 			if result != tt.want {
 				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
 			}
 		})
 	}
+}
+
+func TestEncodeToBytes(t *testing.T) {
+	tests := []struct {
+		dst      []byte
+		src      []byte
+		hextable string
+		want     int
+	}{
+		{
+			dst:      []byte("4920616d206d6f72656d696e64"),
+			src:      []byte("I am moremind"),
+			hextable: "0123456789abcdef",
+			want:     26,
+		},
+		{
+			dst:      []byte("4920616D206D6F72656D696E64"),
+			src:      []byte("I am moremind"),
+			hextable: "0123456789ABCDEF",
+			want:     26,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(string(tt.src), func(t *testing.T) {
+			result := EncodeToBytes(tt.dst, tt.src, tt.hextable)
+			if result != tt.want {
+				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+			}
+		})
+	}
+}
+
+// test encode bytes to upper or lower case bytes
+func TestEncodeToCaseBytes(t *testing.T) {
+	tests := []struct {
+		src         []byte
+		toLowerCase bool
+		want        []byte
+	}{
+		{
+			src:         []byte("I am moremind"),
+			toLowerCase: true,
+			want:        []byte("4920616d206d6f72656d696e64"),
+		},
+		{
+			src:         []byte("I am moremind"),
+			toLowerCase: false,
+			want:        []byte("4920616D206D6F72656D696E64"),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(string(tt.src), func(t *testing.T) {
+			result := EncodeToCaseBytes(tt.src, tt.toLowerCase)
+			if string(result) != string(tt.want) {
+				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+			}
+		})
+	}
+}
+
+// test encode bytes to upper or lower case string
+func TestEncodeToCaseString(t *testing.T) {
+	tests := []struct {
+		src         []byte
+		toLowerCase bool
+		want        string
+	}{
+		{
+			src:         []byte("I am moremind"),
+			toLowerCase: true,
+			want:        "4920616d206d6f72656d696e64",
+		},
+		{
+			src:         []byte("I am moremind"),
+			toLowerCase: false,
+			want:        "4920616D206D6F72656D696E64",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(string(tt.src), func(t *testing.T) {
+			result := EncodeToCaseString(tt.src, tt.toLowerCase)
+			if result != tt.want {
+				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+			}
+		})
+	}
+}
+
+func TestEncodeToHexString(t *testing.T) {
+	tests := []struct {
+		src         string
+		toLowerCase bool
+		want        string
+	}{
+		{
+			src:         "I am moremind",
+			toLowerCase: true,
+			want:        "4920616d206d6f72656d696e64",
+		},
+		{
+			src:         "I am moremind",
+			toLowerCase: false,
+			want:        "4920616D206D6F72656D696E64",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.src, func(t *testing.T) {
+			result := EncodeToHexString(tt.src, tt.toLowerCase)
+			if result != tt.want {
+				t.Errorf("HexEncodeToString() result = %v, want %v", result, tt.want)
+			}
+		})
+	}
+
 }
 
 // test hex decode to string.
