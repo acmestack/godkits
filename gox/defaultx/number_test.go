@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, OpeningO
+ * Copyright (c) 2022, AcmeStack
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package defaultx
 import (
 	"testing"
 
-	"github.com/openingo/godkits/gox/errorsx"
+	"github.com/acmestack/godkits/gox/errorsx"
 )
 
 func TestDefaultComplexIfError(t *testing.T) {

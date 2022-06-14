@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, OpeningO
+ * Copyright (c) 2022, AcmeStack
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/openingo/godkits/gox/defaultx"
+	"github.com/acmestack/godkits/gox/defaultx"
 )
 
 // NotEmpty string
