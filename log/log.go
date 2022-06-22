@@ -48,12 +48,12 @@ type LogFunc func(level int, format string, args ...interface{})
 
 var Log LogFunc = DefaultLogf
 
-// Level default log mode is DEBUG
+// Level default log level is DEBUG
 var Level = DEBUG
 
 var Writer io.Writer = os.Stdout
 
-// InnerLevel inner log mode is DEBUG
+// InnerLevel inner log level is DEBUG
 var InnerLevel = DEBUG
 
 func DefaultLogf(level int, format string, args ...interface{}) {
@@ -97,23 +97,56 @@ func shortFile(file string) string {
 	return short
 }
 
+// Debug log level.
+//  @param format log format
+//  @param args   log args
+//  usage: log.Debug("test")             => [Debug]  2022-06-22 - 13:14:23 log_test.go:11 test
+//  usage: log.Debug("%d %s", 5, "test") => [Debug]  2022-06-22 - 13:14:23 log_test.go:11 5 test
 func Debug(format string, args ...interface{}) {
 	Log(DEBUG, format, args...)
 }
 
+// Info log level.
+//  @param format log format
+//  @param args   log args
+//  usage: log.Info("test")             => [Info]  2022-06-22 - 13:14:23 log_test.go:11 test
+//  usage: log.Info("%d %s", 5, "test") => [Info]  2022-06-22 - 13:14:23 log_test.go:11 5 test
 func Info(format string, args ...interface{}) {
 	Log(INFO, format, args...)
 }
+
+// Warn log level.
+//  @param format log format
+//  @param args   log args
+//  usage: log.Warn("test")             => [Warn]  2022-06-22 - 13:14:23 log_test.go:11 test
+//  usage: log.Warn("%d %s", 5, "test") => [Warn]  2022-06-22 - 13:14:23 log_test.go:11 5 test
 func Warn(format string, args ...interface{}) {
 	Log(WARN, format, args...)
 }
+
+// Error log level.
+//  @param format log format
+//  @param args   log args
+//  usage: log.Error("test")             => [Error]  2022-06-22 - 13:14:23 log_test.go:11 test
+//  usage: log.Error("%d %s", 5, "test") => [Error]  2022-06-22 - 13:14:23 log_test.go:11 5 test
 func Error(format string, args ...interface{}) {
 	Log(ERROR, format, args...)
 }
+
+// Fatal log level.
+//  @param format log format
+//  @param args   log args
+//  usage: log.Fatal("test")             => [Fatal]  2022-06-22 - 13:14:23 log_test.go:11 test
+//  usage: log.Fatal("%d %s", 5, "test") => [Fatal]  2022-06-22 - 13:14:23 log_test.go:11 5 test
 func Fatal(format string, args ...interface{}) {
 	Log(FATAL, format, args...)
 }
 
+// InnerLog log level, the level dependence on your log level.
+//  @param format log format
+//  @param args   log args
+//  usage: log.InnerLog("test")             => [Debug]  2022-06-22 - 13:14:23 log_test.go:11 test
+//  usage: log.InnerLog("%d %s", 5, "test") => [Debug]  2022-06-22 - 13:14:23 log_test.go:11 5 test
 func InnerLog(format string, args ...interface{}) {
 	Log(InnerLevel, format, args...)
 }
