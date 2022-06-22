@@ -19,8 +19,11 @@ type AsyncLogWriter struct {
 	once     sync.Once
 }
 
-// 异步写的Writer，本身Write、Close方法线程安全，参数WriteCloser可以非线程安全
-// Param： w - 实际写入的Writer, bufSize - 接收的最大长度, block - 如果为true，则当超出bufSize大小时Write方法阻塞，否则返回error
+// NewAsyncWriter Write data with Buffer, this Writer and Closer is thread safety, but WriteCloser parameters not safety.
+//  @param w       Writer
+//  @param bufSize accept buffer max length
+//  @param block   if true, overflow buffer size, will blocking, if false will occur error
+//  @return *AsyncLogWriter
 func NewAsyncWriter(w io.Writer, bufSize int, block bool) *AsyncLogWriter {
 	if bufSize <= 0 {
 		bufSize = BufferSize

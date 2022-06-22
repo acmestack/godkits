@@ -25,16 +25,17 @@ type AsyncBufferLogWriter struct {
 }
 
 type Config struct {
-	// 触发刷新的数据大小阈值
+	// triggers refresh data size threshold
 	FlushSize int64
 
-	// 异步缓存的大小，如果超出可能会阻塞或返回错误（由Block控制）
+	// The size of the async cache, which may block or return an error if exceeded
 	BufferSize int
 
-	// 触发刷新的时间间隔
+	// trigger refresh timeInterval
 	FlushInterval time.Duration
 
-	// 如果为true，则当超出bufSize大小时Write方法阻塞，否则返回error
+	// if true, data overflow bufSize will make Write method blocking.
+	// if false, data overflow will return error.
 	Block bool
 }
 
@@ -45,8 +46,10 @@ var defaultConfig = Config{
 	Block:         true,
 }
 
-// 带Buffer的Writer，本身Write、Close方法线程安全，参数WriteCloser可以非线程安全
-// Param: w - 实际写入的Writer， c - Writer的配置，如果不传入则使用默认值，否则使用第1个配置。
+// NewAsyncBufferWriter Write data with Buffer, this Writer and Closer is thread safety, but WriteCloser parameters not safety.
+//  @param w Writer data
+//  @param c Writer config
+//  @return *AsyncBufferLogWriter
 func NewAsyncBufferWriter(w io.Writer, c ...Config) *AsyncBufferLogWriter {
 	conf := defaultConfig
 	if len(c) > 0 {
@@ -106,6 +109,9 @@ func NewAsyncBufferWriter(w io.Writer, c ...Config) *AsyncBufferLogWriter {
 	return &l
 }
 
+// Flush data.
+//  @receiver w AsyncBufferLogWriter pointer point address
+//  @return error
 func (w *AsyncBufferLogWriter) Flush() error {
 	_, err := w.w.Write(w.logBuffer.Bytes())
 	if err != nil {
@@ -115,6 +121,10 @@ func (w *AsyncBufferLogWriter) Flush() error {
 	return nil
 }
 
+// writeLog private method, write log.
+//  @receiver w AsyncBufferLogWriter pointer point address
+//  @param data log data
+//  @return error
 func (w *AsyncBufferLogWriter) writeLog(data []byte) error {
 	w.logBuffer.Write(data)
 
@@ -125,6 +135,9 @@ func (w *AsyncBufferLogWriter) writeLog(data []byte) error {
 	return w.Flush()
 }
 
+// Close close writer buffer
+//  @receiver w
+//  @return error
 func (w *AsyncBufferLogWriter) Close() error {
 	w.once.Do(func() {
 		close(w.stopChan)

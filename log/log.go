@@ -48,10 +48,12 @@ type LogFunc func(level int, format string, args ...interface{})
 
 var Log LogFunc = DefaultLogf
 
+// Level default log mode is DEBUG
 var Level = DEBUG
 
 var Writer io.Writer = os.Stdout
 
+// InnerLevel inner log mode is DEBUG
 var InnerLevel = DEBUG
 
 func DefaultLogf(level int, format string, args ...interface{}) {
@@ -78,7 +80,7 @@ func DefaultLogf(level int, format string, args ...interface{}) {
 		file = "???"
 		line = 0
 	}
-	Writer.Write([]byte(fmt.Sprintf("%s %s %s:%d %s", gLogTag[level], TimeFormat(time.Now()), shortFile(file), line, logInfo)))
+	Writer.Write([]byte(fmt.Sprintf("%-7s %s %s:%d %s", gLogTag[level], TimeFormat(time.Now()), shortFile(file), line, logInfo)))
 	if level >= FATAL {
 		os.Exit(-1)
 	}
@@ -117,6 +119,6 @@ func InnerLog(format string, args ...interface{}) {
 }
 
 func TimeFormat(t time.Time) string {
-	var timeString = t.Format("2006/01/02 - 15:04:05")
+	var timeString = t.Format("2006-01-02 - 15:04:05")
 	return timeString
 }

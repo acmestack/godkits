@@ -1,0 +1,21 @@
+package log
+
+import (
+	"testing"
+	"time"
+)
+
+func TestInfo(t *testing.T) {
+	Info("123")
+	Info("", 5, 1.1, "测试", time.Now())
+}
+
+func TestDebug(t *testing.T) {
+	Debug("123")
+	Debug("", 5, 1.1, "测试", time.Now())
+}
+
+func TestError(t *testing.T) {
+	Error("123")
+	Error("", 5, 1.1, "测试", time.Now())
+}
