@@ -24,7 +24,6 @@ import (
 
 func TestEqual(t *testing.T) {
 	Equal(t, "foo", "bar", "msg!")
-	//Equal(t, "foo", "bar", "this should blow up")
 }
 
 func TestNotEqual(t *testing.T) {
@@ -53,9 +52,8 @@ func TestNotEqual(t *testing.T) {
 		},
 	}
 	r2.R.R.R = r2
-	//r2.R.R = r2
+	//r2.R.R = r2 // notEqual
 	NotEqual(t, r, r2, "msg!")
-	//NotEqual(t, "foo", "foo", "this should blow up")
 }
 
 func TestIsNull(t *testing.T) {
