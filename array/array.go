@@ -17,6 +17,8 @@
 
 package array
 
+type any = interface{}
+
 // NotEmpty array
 func NotEmpty(arr ...any) bool {
 	return !Empty(arr)

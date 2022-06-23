@@ -1,3 +1,3 @@
 module github.com/acmestack/godkits
 
-go 1.18
+go 1.16
