@@ -19,6 +19,8 @@ package listx
 
 import "container/list"
 
+type any = interface{}
+
 // Listx extend from list.List
 type Listx struct {
 	list.List
