@@ -19,6 +19,8 @@ package mapx
 
 import "log"
 
+type any = interface{}
+
 func checkMap(m *Map) {
 	if m == nil || m.kv == nil {
 		log.Println("the map illegal state, invoke the `NewMap` func first")

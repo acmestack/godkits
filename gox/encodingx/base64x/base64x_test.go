@@ -21,6 +21,8 @@ import (
 	"testing"
 )
 
+type any = interface{}
+
 // test TestBase64EncodeToString
 // base64("i am moremind") = "aSBhbSBtb3JlbWluZA=="
 func TestBase64EncodeToString(t *testing.T) {

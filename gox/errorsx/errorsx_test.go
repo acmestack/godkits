@@ -22,6 +22,8 @@ import (
 	"testing"
 )
 
+type any = interface{}
+
 func TestErr(t *testing.T) {
 	type args struct {
 		message string
