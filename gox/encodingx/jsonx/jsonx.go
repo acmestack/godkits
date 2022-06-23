@@ -19,6 +19,8 @@ package jsonx
 
 import "encoding/json"
 
+type any = interface{}
+
 // ToJsonBytes convert any to json bytes
 // wrap json.Marshal
 func ToJsonBytes(v any) ([]byte, error) {

@@ -15,20 +15,26 @@
  * limitations under the License.
  */
 
-package mapx
+package log
 
-import "log"
+import (
+	"testing"
+	"time"
+)
 
-type any = interface{}
-
-func checkMap(m *Map) {
-	if m == nil || m.kv == nil {
-		log.Println("the map illegal state, invoke the `NewMap` func first")
-	}
+func TestInfo(t *testing.T) {
+	Info("123")
+	Info("", 5, 1.1, "test")
+	Info("%d %s", 5, "test")
+	InnerLog("123")
 }
 
-func checkMultiValuesMap(m *MultiValueMap) {
-	if m == nil || m.kvs == nil {
-		log.Println("the mutil values map illegal state, invoke the `NewMultiValueMap` func first")
-	}
+func TestDebug(t *testing.T) {
+	Debug("123")
+	Debug("", 5, 1.1, "test", time.Now())
+}
+
+func TestError(t *testing.T) {
+	Error("123")
+	Error("", 5, 1.1, "test", time.Now())
 }

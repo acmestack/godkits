@@ -25,6 +25,8 @@ import (
 
 const key = "1234567891234567"
 
+type any = interface{}
+
 func TestDecrypt0(t *testing.T) {
 	type args struct {
 		encrypted []byte
