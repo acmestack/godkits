@@ -39,5 +39,5 @@ func TestLog(t *testing.T) {
 
 ## Contribute and Support
 
-- [How to Contribute](https://openingo.org/docs/contributing/guide/)
+- [How to Contribute](https://acmestack.org/docs/contributing/guide/)
 - [Document]()
