@@ -21,3 +21,23 @@ the golang development toolkits.
 
 ### Other Extensions
 - package start with **feature name**, like `http`
+
+
+## Usage
+```go
+
+import "github.com/acmestack/godkits/log/log"
+
+func TestLog(t *testing.T) {
+	log.Info("test")
+}
+```
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/acmestack/godkits.svg)](https://starchart.cc/acmestack/godkits)
+
+## Contribute and Support
+
+- [How to Contribute](https://openingo.org/docs/contributing/guide/)
+- [Document]()
