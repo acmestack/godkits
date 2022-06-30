@@ -33,6 +33,25 @@ func TestLog(t *testing.T) {
 }
 ```
 
+## Code Comment
+
+### Code comment with method
+```go
+// TestLog test log
+//  @params t tests params
+func TestLog(t *testing.T) {
+log.Info("test")
+}
+
+// NewAsyncWriter Write data with Buffer, this Writer and Closer is thread safety, but WriteCloser parameters not safety.
+//  @param w       Writer
+//  @param bufSize accept buffer max length
+//  @param block   if true, overflow buffer size, will blocking, if false will occur error
+//  @return *AsyncLogWriter
+func NewAsyncWriter(w io.Writer, bufSize int, block bool) *AsyncLogWriter {
+}
+```
+
 ## Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/acmestack/godkits.svg)](https://starchart.cc/acmestack/godkits)
