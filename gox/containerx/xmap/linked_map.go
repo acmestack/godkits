@@ -57,7 +57,6 @@ func (m *LinkedMap) init() {
 //  @param v
 //  @param at
 //  @return *node
-//
 func (m *LinkedMap) insert(v interface{}, at *node) *node {
 	e := &node{v: v}
 	n := at.next
@@ -74,7 +73,6 @@ func (m *LinkedMap) insert(v interface{}, at *node) *node {
 //  @receiver m
 //  @param key
 //  @param value
-//
 func (m *LinkedMap) Put(key, value interface{}) {
 	if e, ok := m.m[key]; ok {
 		e.v = [2]interface{}{key, value}
@@ -93,7 +91,6 @@ func (m *LinkedMap) Put(key, value interface{}) {
 //  @param value
 //  @return actual Key already exists return old value, not exists return new value
 //  @return loaded loaded success is true, fail is false
-//
 func (m *LinkedMap) GetOrPut(key, value interface{}) (actual interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -112,7 +109,6 @@ func (m *LinkedMap) GetOrPut(key, value interface{}) (actual interface{}, loaded
 //  @param key
 //  @return value
 //  @return loaded loaded success is true, fail is false
-//
 func (m *LinkedMap) Get(key interface{}) (value interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -125,7 +121,6 @@ func (m *LinkedMap) Get(key interface{}) (value interface{}, loaded bool) {
 //  @Description: delete by key
 //  @receiver m
 //  @param key
-//
 func (m *LinkedMap) Delete(key interface{}) {
 	if n, ok := m.m[key]; ok {
 		n.prev.next = n.next
@@ -139,7 +134,6 @@ func (m *LinkedMap) Delete(key interface{}) {
 //  @Description:
 //  @receiver m
 //  @return int
-//
 func (m *LinkedMap) Size() int {
 	return len(m.m)
 }
@@ -148,7 +142,6 @@ func (m *LinkedMap) Size() int {
 //  @Description: Foreach O(N)
 //  @receiver m
 //  @param f The function that accepts polling returns true to continue polling and false to terminate polling
-//
 func (m *LinkedMap) Foreach(f func(key interface{}, value interface{}) bool) {
 	for e := m.head.next; e != nil && e != &m.head; e = e.next {
 		kv := e.v.([2]interface{})
@@ -163,7 +156,6 @@ func (m *LinkedMap) Foreach(f func(key interface{}, value interface{}) bool) {
 //  @receiver m
 //  @param key
 //  @return bool loaded loaded success is true, fail is false
-//
 func (m *LinkedMap) Find(key interface{}) bool {
 	_, ok := m.m[key]
 	return ok
@@ -183,7 +175,6 @@ func NewSimpleLinkedMap() *SimpleLinkedMap {
 //  @receiver m
 //  @param key
 //  @param value
-//
 func (m *SimpleLinkedMap) Put(key, value interface{}) {
 	if e, ok := m.m[key]; ok {
 		e.Value = [2]interface{}{key, value}
@@ -198,7 +189,6 @@ func (m *SimpleLinkedMap) Put(key, value interface{}) {
 //  @param value
 //  @return actual Key already exists return old value, not exists return new value
 //  @return loaded loaded success is true, fail is false
-//
 func (m *SimpleLinkedMap) GetOrPut(key, value interface{}) (actual interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -214,7 +204,6 @@ func (m *SimpleLinkedMap) GetOrPut(key, value interface{}) (actual interface{}, 
 //  @param key
 //  @return value
 //  @return loaded loaded success is true, fail is false
-//
 func (m *SimpleLinkedMap) Get(key interface{}) (value interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -227,7 +216,6 @@ func (m *SimpleLinkedMap) Get(key interface{}) (value interface{}, loaded bool) 
 //  @Description:
 //  @receiver m
 //  @param key
-//
 func (m *SimpleLinkedMap) Delete(key interface{}) {
 	if e, ok := m.m[key]; ok {
 		m.l.Remove(e)
@@ -239,7 +227,6 @@ func (m *SimpleLinkedMap) Delete(key interface{}) {
 //  @Description:
 //  @receiver m
 //  @return int
-//
 func (m *SimpleLinkedMap) Size() int {
 	return len(m.m)
 }
@@ -248,7 +235,6 @@ func (m *SimpleLinkedMap) Size() int {
 //  @Description: Foreach O(N)
 //  @receiver m
 //  @param f The function that accepts polling returns true to continue polling and false to terminate polling
-//
 func (m *SimpleLinkedMap) Foreach(f func(key interface{}, value interface{}) bool) {
 	for e := m.l.Front(); e != nil; e = e.Next() {
 		kv := e.Value.([2]interface{})
@@ -263,7 +249,6 @@ func (m *SimpleLinkedMap) Foreach(f func(key interface{}, value interface{}) boo
 //  @receiver m
 //  @param key
 //  @return bool loaded loaded success is true, fail is false
-//
 func (m *SimpleLinkedMap) Find(key interface{}) bool {
 	_, ok := m.m[key]
 	return ok

@@ -70,7 +70,6 @@ type LruQueue struct {
 //  @Description: NewLruElement by value
 //  @param v
 //  @return *QueueElem
-//
 func NewLruElement(v interface{}) *QueueElem {
 	return &QueueElem{
 		Value: v,
@@ -81,7 +80,6 @@ func NewLruElement(v interface{}) *QueueElem {
 //  @Description: new a appoint capacity NewLruQueue
 //  @param cap capacity
 //  @return *LruQueue
-//
 func NewLruQueue(cap int) *LruQueue {
 	return &LruQueue{
 		list:      list.New(),
@@ -94,7 +92,6 @@ func NewLruQueue(cap int) *LruQueue {
 //  @Description:
 //  @receiver q
 //  @param listener
-//
 func (q *LruQueue) AddListener(listener QueueListener) {
 	q.listeners = append(q.listeners, listener)
 }
@@ -103,7 +100,6 @@ func (q *LruQueue) AddListener(listener QueueListener) {
 //  @Description:
 //  @receiver q
 //  @param elem
-//
 func (q *LruQueue) Touch(elem *QueueElem) {
 	if elem != nil {
 		q.list.MoveToFront((*list.Element)(elem))
@@ -120,7 +116,6 @@ func (q *LruQueue) Touch(elem *QueueElem) {
 //  @param elem
 //  @param notify
 //  @return *QueueElem
-//
 func (q *LruQueue) Move(other *LruQueue, elem *QueueElem, notify bool) *QueueElem {
 	if other == nil || elem == nil {
 		return nil
@@ -146,7 +141,6 @@ func (q *LruQueue) Move(other *LruQueue, elem *QueueElem, notify bool) *QueueEle
 //  @receiver q
 //  @param v
 //  @return *QueueElem
-//
 func (q *LruQueue) Insert(v interface{}) *QueueElem {
 	if q.list.Len() == q.cap {
 		e := q.list.Back()
@@ -166,7 +160,6 @@ func (q *LruQueue) Insert(v interface{}) *QueueElem {
 //  @Description:
 //  @receiver q
 //  @param elem
-//
 func (q *LruQueue) Delete(elem *QueueElem) {
 	v := q.list.Remove((*list.Element)(elem))
 	for _, l := range q.listeners {

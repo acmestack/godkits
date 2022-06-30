@@ -44,7 +44,6 @@ type SimpleLru struct {
 //  @Description: new a appoint capacity SimpleLru
 //  @param capacity
 //  @return *SimpleLru
-//
 func NewLruCache(capacity int) *SimpleLru {
 	ret := &SimpleLru{
 		m:   map[interface{}]*QueueElem{},
@@ -65,7 +64,6 @@ func (m *SimpleLru) PostInsert(v interface{}) {
 //  import PostDelete
 //  @Description: Purge data
 //  @receiver m
-//
 func (m *SimpleLru) PostDelete(v interface{}) {
 	key := v.([2]interface{})[0]
 	delete(m.m, key)
@@ -78,7 +76,6 @@ func (m *SimpleLru) hit(key interface{}, hit bool) {
 // Purge
 //  @Description: Purge data
 //  @receiver m
-//
 func (m *SimpleLru) Purge() {
 	m.queue.listeners = nil
 	m.queue.list = nil
@@ -90,7 +87,6 @@ func (m *SimpleLru) Purge() {
 //  @receiver m
 //  @param key key
 //  @param value value
-//
 func (m *SimpleLru) Put(key, value interface{}) {
 	e, ok := m.m[key]
 	if ok {
@@ -108,7 +104,6 @@ func (m *SimpleLru) Put(key, value interface{}) {
 //  @param key key
 //  @return value value
 //  @return loaded success is true, fail is false
-//
 func (m *SimpleLru) Get(key interface{}) (value interface{}, loaded bool) {
 	v, ok := m.m[key]
 	if ok {
@@ -127,7 +122,6 @@ func (m *SimpleLru) Get(key interface{}) (value interface{}, loaded bool) {
 //  @Description: delete by key
 //  @receiver m
 //  @param key
-//
 func (m *SimpleLru) Delete(key interface{}) {
 	v, ok := m.m[key]
 	if ok {
@@ -139,7 +133,6 @@ func (m *SimpleLru) Delete(key interface{}) {
 //  @Description: get Lru queue Size
 //  @receiver m
 //  @return int
-//
 func (m *SimpleLru) Size() int {
 	return len(m.m)
 }

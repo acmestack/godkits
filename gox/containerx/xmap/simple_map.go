@@ -28,7 +28,6 @@ func NewSimpleMap() *SimpleMap {
 //  @receiver m
 //  @param key
 //  @param value
-//
 func (m SimpleMap) Put(key, value interface{}) {
 	m[key] = value
 }
@@ -40,7 +39,6 @@ func (m SimpleMap) Put(key, value interface{}) {
 //  @param value
 //  @return actual Key already exists return old value, not exists return new value
 //  @return loaded loaded success is true, fail is false
-//
 func (m SimpleMap) GetOrPut(key, value interface{}) (actual interface{}, loaded bool) {
 	o, ok := m[key]
 	if ok {
@@ -56,7 +54,6 @@ func (m SimpleMap) GetOrPut(key, value interface{}) (actual interface{}, loaded 
 //  @param key
 //  @return value
 //  @return loaded loaded success is true, fail is false
-//
 func (m SimpleMap) Get(key interface{}) (value interface{}, loaded bool) {
 	o, ok := m[key]
 	if ok {
@@ -69,7 +66,6 @@ func (m SimpleMap) Get(key interface{}) (value interface{}, loaded bool) {
 //  @Description:
 //  @receiver m
 //  @param key
-//
 func (m SimpleMap) Delete(key interface{}) {
 	delete(m, key)
 }
@@ -78,7 +74,6 @@ func (m SimpleMap) Delete(key interface{}) {
 //  @Description:
 //  @receiver m
 //  @return int
-//
 func (m SimpleMap) Size() int {
 	return len(m)
 }
@@ -87,7 +82,6 @@ func (m SimpleMap) Size() int {
 //  @Description: Foreach O(N)
 //  @receiver m
 //  @param f The function that accepts polling returns true to continue polling and false to terminate polling
-//
 func (m SimpleMap) Foreach(f func(interface{}, interface{}) bool) {
 	for k, v := range m {
 		if !f(k, v) {
@@ -101,7 +95,6 @@ func (m SimpleMap) Foreach(f func(interface{}, interface{}) bool) {
 //  @receiver m
 //  @param key
 //  @return bool loaded loaded success is true, fail is false
-//
 func (m SimpleMap) Find(key interface{}) bool {
 	_, ok := m[key]
 	return ok
