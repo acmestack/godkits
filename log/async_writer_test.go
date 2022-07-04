@@ -45,6 +45,7 @@ func TestNewAsyncWriter(t *testing.T) {
 }
 
 // TestAsyncLogWriter_Write test AsyncLogWriter.Write method
+//   @params t tests params
 func TestAsyncLogWriter_Write(t *testing.T) {
 	type want struct {
 		n   int
