@@ -18,49 +18,37 @@
 package xmap
 
 type IMap interface {
-	// Put
-	//  @Description: put to IMap
-	//  @param key
-	//  @param value
-	//
+	// Put put (key, value) into map
+	//  @param key   key
+	//  @param value value
 	Put(key, value interface{})
 
-	// Get
-	//  @Description: get by IMap
-	//  @param key
-	//  @return value
+	// Get get value element by key
+	//  @param key key
+	//  @return value value
 	//  @return loaded success is true, fail is false
-	//
 	Get(key interface{}) (value interface{}, loaded bool)
 
-	// Delete
-	//  @Description: delete by IMap
-	//  @param key
-	//
+	// Delete delete element by key in map
+	//  @param key key
 	Delete(key interface{})
 
-	// Size
-	//  @Description: get IMap Size
-	//  @return int
-	//
+	// Size calc size
+	//  @return int map size
 	Size() int
 }
 
 type Map interface {
 	IMap
 
-	// GetOrPut
-	//  @Description: get or put to Map
-	//  @param key
-	//  @param value
+	// GetOrPut get value when key exist, not exists return new value, value into map, allow nil
+	//  @param key   key
+	//  @param value value
 	//  @return actual Key already exists return old value, not exists return new value
-	//  @return loaded loaded success is true, fail is false
-	//
+	//  @return loaded uccess is true, fail is false
 	GetOrPut(key, value interface{}) (actual interface{}, loaded bool)
 
-	// Foreach
-	//  @Description: Foreach Map O(N)
+	// Foreach O(N)
 	//  @param f The function that accepts polling returns true to continue polling and false to terminate polling
-	//
 	Foreach(f func(interface{}, interface{}) bool)
 }

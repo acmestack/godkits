@@ -18,54 +18,45 @@
 package xlist
 
 type List interface {
-	// PushBack
-	//  @Description:
-	//  @param o
+
+	// PushBack push value in tail
+	//  @param o value
 	PushBack(o interface{})
 
-	// PushFront
-	//  @Description:
-	//  @param o
+	// PushFront push value in head
+	//  @param o value
 	PushFront(o interface{})
 
-	// Remove
-	//  @Description:
-	//  @param o
+	// Remove remove an element
+	//  @param o value
 	Remove(o interface{})
 
-	// Front
-	//  @Description:
+	// Front get head element
 	//  @return interface{}
 	Front() interface{}
 
-	// Back
-	//  @Description:
+	// Back get tail element
 	//  @return interface{}
 	Back() interface{}
 
-	// PopFront
-	//  @Description:
+	// PopFront pop head element
 	//  @return interface{}
 	PopFront() interface{}
 
-	// PopBack
-	//  @Description:
+	// PopBack pop tail element
 	//  @return interface{}
 	PopBack() interface{}
 
-	// Len
-	//  @Description:
+	// Len calc list length
 	//  @return int
 	Len() int
 
-	// Foreach
-	//  @Description: The function that accepts polling returns true to continue polling and false to terminate polling
-	//  @param f
+	// Foreach The function that accepts polling returns true to continue polling and false to terminate polling
+	//  @param f function
 	Foreach(f func(interface{}) bool)
 
-	// Find
-	//  @Description:
-	//  @param i
-	//  @return bool
+	// Find find element in list
+	//  @param i element
+	//  @return bool exist => true, not exist => false
 	Find(i interface{}) bool
 }

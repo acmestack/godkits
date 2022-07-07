@@ -24,10 +24,10 @@ import (
 	"testing"
 )
 
-/*
- * Judge whether the value is nil
- * args Error prompt content
- */
+// IsNull Judge whether the value is nil
+//  @param t    test
+//  @param got  want type
+//  @param args error prompt content
 func IsNull(t *testing.T, got interface{}, args ...interface{}) {
 	fn := func() {
 		t.Errorf("!  isNull")
@@ -39,38 +39,36 @@ func IsNull(t *testing.T, got interface{}, args ...interface{}) {
 	assert(t, result, fn, 2)
 }
 
-/*
- * Judge whether the value is true
- * args Error prompt content
- */
+// IsTrue Judge whether the value is true
+//  @param t      test
+//  @param result true
+//  @param args   error prompt content
 func IsTrue(t *testing.T, result bool, args ...interface{}) {
 	tt(t, result, 1, args...)
 }
 
-/*
- * Judge whether the value is false
- * args Error prompt content
- */
+// IsFalse Judge whether the value is false
+//  @param t      test
+//  @param result false
+//  @param args   error prompt content
 func IsFalse(t *testing.T, result bool, args ...interface{}) {
 	tt(t, !result, 1, args...)
 }
 
-/*
- * Judge whether the values are not equal
- * exp Comparison value
- * got Compared value
- * args Error prompt content
- */
+// Equal Judge whether the values are not equal
+//  @param t   test
+//  @param exp expect result
+//  @param got compared value
+//  @param args error prompt content
 func Equal(t *testing.T, exp, got interface{}, args ...interface{}) {
 	equal(t, exp, got, 1, args...)
 }
 
-/*
- * Judge whether the values are equal
- * exp Comparison value
- * got Compared value
- * args Error prompt content
- */
+// NotEqual Judge whether the values are equal
+//  @param t   test
+//  @param exp expect result
+//  @param got compared value
+//  @param args error prompt content
 func NotEqual(t *testing.T, exp, got interface{}, args ...interface{}) {
 	fn := func() {
 		t.Errorf("!  Unexpected: <%#v>", exp)
@@ -82,6 +80,11 @@ func NotEqual(t *testing.T, exp, got interface{}, args ...interface{}) {
 	assert(t, result, fn, 1)
 }
 
+// assert  assertion
+//  @param t      test
+//  @param result result
+//  @param f      function
+//  @param cd	  hierarchy
 func assert(t *testing.T, result bool, f func(), cd int) {
 	if !result {
 		_, file, line, _ := runtime.Caller(cd + 1)
@@ -91,6 +94,12 @@ func assert(t *testing.T, result bool, f func(), cd int) {
 	}
 }
 
+// equal judge equal
+//  @param t   test
+//  @param exp expect result
+//  @param got compared value
+//  @param cd  hierarchy
+//  @param args error prompt content
 func equal(t *testing.T, exp, got interface{}, cd int, args ...interface{}) {
 	fn := func() {
 		t.Errorf("!  Error unlike")
@@ -102,6 +111,11 @@ func equal(t *testing.T, exp, got interface{}, cd int, args ...interface{}) {
 	assert(t, result, fn, cd+1)
 }
 
+// tt test equal
+//  @param t      test
+//  @param result wanted result
+//  @param cd     hierarchy
+//  @param args   error prompt content
 func tt(t *testing.T, result bool, cd int, args ...interface{}) {
 	fn := func() {
 		t.Errorf("!  Failure")

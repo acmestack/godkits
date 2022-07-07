@@ -24,15 +24,15 @@ import (
 
 func TestArraylist_Add(t *testing.T) {
 	emptyArrayList := Arraylist{
-		elements: []any{},
+		elements: []Any{},
 		size:     0,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
-		element []any
+		element []Any
 	}
 	tests := []struct {
 		name   string
@@ -44,7 +44,7 @@ func TestArraylist_Add(t *testing.T) {
 				elements: emptyArrayList.elements,
 				size:     emptyArrayList.size,
 			},
-			args: args{element: []any{"hello", "world"}},
+			args: args{element: []Any{"hello", "world"}},
 		},
 	}
 	for _, tt := range tests {
@@ -60,15 +60,15 @@ func TestArraylist_Add(t *testing.T) {
 
 func TestArraylist_Contains(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
-		element any
+		element Any
 	}
 
 	tests := []struct {
@@ -107,11 +107,11 @@ func TestArraylist_Contains(t *testing.T) {
 
 func TestArraylist_Empty(t *testing.T) {
 	emptyArrayList := Arraylist{
-		elements: []any{},
+		elements: []Any{},
 		size:     0,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	tests := []struct {
@@ -142,11 +142,11 @@ func TestArraylist_Empty(t *testing.T) {
 
 func TestArraylist_Get(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
@@ -156,7 +156,7 @@ func TestArraylist_Get(t *testing.T) {
 		name   string
 		fields fields
 		args   args
-		want   any
+		want   Any
 	}{
 		{
 			fields: fields{
@@ -198,15 +198,15 @@ func TestArraylist_Get(t *testing.T) {
 
 func TestArraylist_IndexOf(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
-		element any
+		element Any
 	}
 	tests := []struct {
 		name   string
@@ -238,11 +238,11 @@ func TestArraylist_IndexOf(t *testing.T) {
 
 func TestArraylist_RemoveAtIndex(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
@@ -252,7 +252,7 @@ func TestArraylist_RemoveAtIndex(t *testing.T) {
 		name   string
 		fields fields
 		args   args
-		want   any
+		want   Any
 	}{
 		{
 			fields: fields{
@@ -294,11 +294,11 @@ func TestArraylist_RemoveAtIndex(t *testing.T) {
 
 func TestArraylist_Size(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	tests := []struct {
@@ -329,15 +329,15 @@ func TestArraylist_Size(t *testing.T) {
 
 func TestArraylist_find(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
-		element any
+		element Any
 	}
 	tests := []struct {
 		name   string
@@ -375,11 +375,11 @@ func TestArraylist_find(t *testing.T) {
 
 func TestNew(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type args struct {
-		elements []any
+		elements []Any
 	}
 
 	tests := []struct {
@@ -403,15 +403,15 @@ func TestNew(t *testing.T) {
 
 func TestArraylist_Remove(t *testing.T) {
 	arrayList := &Arraylist{
-		elements: []any{"hello", "world"},
+		elements: []Any{"hello", "world"},
 		size:     2,
 	}
 	type fields struct {
-		elements []any
+		elements []Any
 		size     int
 	}
 	type args struct {
-		element any
+		element Any
 	}
 	tests := []struct {
 		name   string

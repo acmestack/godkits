@@ -28,24 +28,28 @@ const defaultArraylistSize = 10
 
 // Arraylist array lst
 type Arraylist struct {
-	elements []any
+	elements []Any
 	size     int
 }
 
-// New an array list
-func New(element ...any) *Arraylist {
+// New create an array list
+//  @param element array element
+//  @return *Arraylist
+func New(element ...Any) *Arraylist {
 	lst := &Arraylist{}
-	lst.elements = make([]any, defaultArraylistSize)
+	lst.elements = make([]Any, defaultArraylistSize)
 	if len(element) > 0 {
 		lst.Add(element...)
 	}
 	return lst
 }
 
-// Add element to array list
-func (lst *Arraylist) Add(element ...any) {
+// Add save element to array list
+//  @receiver lst lst
+//  @param element array element
+func (lst *Arraylist) Add(element ...Any) {
 	if lst.size+len(element) >= len(lst.elements)-1 {
-		newElements := make([]any, lst.size+len(element)+1)
+		newElements := make([]Any, lst.size+len(element)+1)
 		copy(newElements, lst.elements)
 		lst.elements = newElements
 	}
@@ -57,7 +61,11 @@ func (lst *Arraylist) Add(element ...any) {
 }
 
 // RemoveAtIndex from array list at index
-func (lst *Arraylist) RemoveAtIndex(index int) any {
+// RemoveAtIndex remove from array list at index
+//  @receiver lst lst
+//  @param index array index
+//  @return any
+func (lst *Arraylist) RemoveAtIndex(index int) Any {
 	if index < 0 || index >= lst.size {
 		return nil
 	}
@@ -69,41 +77,63 @@ func (lst *Arraylist) RemoveAtIndex(index int) any {
 	return current
 }
 
-// Remove from array list
-func (lst *Arraylist) Remove(element any) bool {
+// Remove delete from array list
+//  @receiver lst
+//  @param element element
+//  @return bool true or false
+func (lst *Arraylist) Remove(element Any) bool {
 	return reflect.DeepEqual(lst.RemoveAtIndex(lst.IndexOf(element)), element)
 }
 
-// Get element from array list at index
-func (lst *Arraylist) Get(index int) any {
+// Get get element from array list at index
+//  @receiver lst
+//  @param index element index
+//  @return Any current result
+func (lst *Arraylist) Get(index int) Any {
 	if index < 0 || index >= lst.size {
 		return nil
 	}
 	return lst.elements[index]
 }
 
-// IndexOf element from array list
-func (lst *Arraylist) IndexOf(element any) int {
+// IndexOf index element from array list
+//  @receiver lst
+//  @param element element
+//  @return int current element index
+func (lst *Arraylist) IndexOf(element Any) int {
 	_, index := lst.find(element)
 	return index
 }
 
-// Empty array list
+// Empty judge array is empty
+//  @receiver lst
+//  @return bool true => empty, false => not empty
 func (lst *Arraylist) Empty() bool {
 	return lst == nil || lst.Size() == 0 || array.Empty(lst.elements)
 }
 
-// Size of array list
+// Size calc array length
+//  @receiver lst
+//  @return int array length
 func (lst *Arraylist) Size() int {
 	return lst.size
 }
 
-// Contains element at array list or not
-func (lst *Arraylist) Contains(element any) (bool, int) {
+// Contains judge array exist element, and return exist result and index
+//  @receiver lst
+//  @param element element
+//  @return bool   exist result
+//  @return int index
+func (lst *Arraylist) Contains(element Any) (bool, int) {
 	return lst.find(element)
 }
 
-func (lst *Arraylist) find(element any) (bool, int) {
+// find query element in array, and return exist and index
+//  @receiver lst
+//  @param element element
+//  @return bool true => exist, false => not exist
+//  @return int  current element index
+func (lst *Arraylist) find(element Any) (bool, int) {
 	for idx, current := range lst.elements {
 		if current == element {
 			return true, idx
