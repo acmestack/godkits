@@ -18,6 +18,9 @@
 package bytesx
 
 // SetAll set all bytes of the slice to value
+// SetAll set all bytes of the slice to value
+//  @param b byte array
+//  @param v param
 func SetAll(b []byte, v byte) {
 	for i := 0; i < len(b); i++ {
 		b[i] = v
@@ -25,11 +28,14 @@ func SetAll(b []byte, v byte) {
 }
 
 // ZeroAll set all bytes of the slice to 0
+//  @param b byte array
 func ZeroAll(b []byte) {
 	SetAll(b, 0)
 }
 
 // FromUint16LE convert uint16 to []byte in little endian
+//  @param v param
+//  @return []byte result
 func FromUint16LE(v uint16) []byte {
 	return []byte{
 		byte(v),

@@ -125,9 +125,9 @@ func TestNotEmpty(t *testing.T) {
 }
 func TestListx_ForEach(t *testing.T) {
 	type args struct {
-		fn func(any)
+		fn func(Any)
 	}
-	fn := func(val any) { t.Log(val) }
+	fn := func(val Any) { t.Log(val) }
 	lst := &Listx{List: *list.New()}
 	lst.PushBack("hello")
 	lst.PushBack("world")

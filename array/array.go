@@ -19,12 +19,16 @@ package array
 
 type any = interface{}
 
-// NotEmpty array
+// NotEmpty judge array is not empty
+//  @param arr  array
+//  @return bool not empty => true, empty => false
 func NotEmpty(arr ...any) bool {
 	return !Empty(arr)
 }
 
-// Empty array
+// Empty judge array is empty
+//  @param arr   array
+//  @return bool empty => true, not empty => false
 func Empty(arr ...any) bool {
 	return arr == nil || len(arr) == 0
 }

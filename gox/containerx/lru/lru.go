@@ -21,18 +21,13 @@ import (
 	"github.com/acmestack/godkits/gox/containerx/xmap"
 )
 
-// LRU
-//  @Description: interface LRU
-//
 type LRU interface {
 	xmap.IMap
 
 	Purge()
 }
 
-// SimpleLru
-//  @Description: type SimpleLru
-//
+// SimpleLru type SimpleLru
 type SimpleLru struct {
 	m     map[interface{}]*QueueElem
 	queue *LruQueue
@@ -40,10 +35,9 @@ type SimpleLru struct {
 	cap int
 }
 
-// NewLruCache
-//  @Description: new a appoint capacity SimpleLru
-//  @param capacity
-//  @return *SimpleLru
+// NewLruCache new a appoint capacity SimpleLru
+//  @param capacity lru cache capacity
+//  @return *SimpleLru simple lru
 func NewLruCache(capacity int) *SimpleLru {
 	ret := &SimpleLru{
 		m:   map[interface{}]*QueueElem{},
@@ -60,10 +54,9 @@ func (m *SimpleLru) PostTouch(v interface{}) {
 func (m *SimpleLru) PostInsert(v interface{}) {
 }
 
-// PostDelete
-//  import PostDelete
-//  @Description: Purge data
-//  @receiver m
+// PostDelete delete data
+//  @receiver m lru cache
+//  @param v param
 func (m *SimpleLru) PostDelete(v interface{}) {
 	key := v.([2]interface{})[0]
 	delete(m.m, key)
@@ -73,8 +66,7 @@ func (m *SimpleLru) hit(key interface{}, hit bool) {
 
 }
 
-// Purge
-//  @Description: Purge data
+// Purge Purge data
 //  @receiver m
 func (m *SimpleLru) Purge() {
 	m.queue.listeners = nil
@@ -82,9 +74,8 @@ func (m *SimpleLru) Purge() {
 	m.queue = nil
 }
 
-// Put
-//  @Description: put value to lru
-//  @receiver m
+// Put  put value to lru
+//  @receiver m lru cache
 //  @param key key
 //  @param value value
 func (m *SimpleLru) Put(key, value interface{}) {
@@ -98,8 +89,7 @@ func (m *SimpleLru) Put(key, value interface{}) {
 	}
 }
 
-// Get
-//  @Description: Get key to value
+// Get get key to value
 //  @receiver m SimpleLru
 //  @param key key
 //  @return value value
@@ -118,10 +108,9 @@ func (m *SimpleLru) Get(key interface{}) (value interface{}, loaded bool) {
 	}
 }
 
-// Delete
-//  @Description: delete by key
-//  @receiver m
-//  @param key
+// Delete delete by key
+//  @receiver m lru cache
+//  @param key key
 func (m *SimpleLru) Delete(key interface{}) {
 	v, ok := m.m[key]
 	if ok {
@@ -129,10 +118,9 @@ func (m *SimpleLru) Delete(key interface{}) {
 	}
 }
 
-// Size
-//  @Description: get Lru queue Size
-//  @receiver m
-//  @return int
+// Size get Lru queue Size
+//  @receiver m lru cache
+//  @return int lru cache size
 func (m *SimpleLru) Size() int {
 	return len(m.m)
 }
