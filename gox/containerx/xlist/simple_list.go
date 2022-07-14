@@ -32,26 +32,23 @@ func NewSimpleList() *SimpleList {
 	}
 }
 
-// PushBack
-//  @Description: Add an element at the end of the linked list
-//  @receiver l
-//  @param o
+// PushBack add an element at the end of the linked list
+//  @receiver l list
+//  @param o element
 func (l *SimpleList) PushBack(o interface{}) {
 	l.l.PushBack(o)
 }
 
-// PushFront
-//  @Description: Add an element at the head of the linked list
-//  @receiver l
-//  @param o
+// PushFront Add an element at the head of the linked list
+//  @receiver l list
+//  @param o element
 func (l *SimpleList) PushFront(o interface{}) {
 	l.l.PushFront(o)
 }
 
-// Remove
-//  @Description: remove O(N)
-//  @receiver l
-//  @param o
+// Remove remove element in list
+//  @receiver l list
+//  @param o element
 func (l *SimpleList) Remove(o interface{}) {
 	for e := l.l.Front(); e != nil; e = e.Next() {
 		if reflect.DeepEqual(o, e.Value) {
@@ -61,9 +58,8 @@ func (l *SimpleList) Remove(o interface{}) {
 	}
 }
 
-// Front
-//  @Description: First element (first element), if nil is not returned
-//  @receiver l
+// Front First element (first element), if nil is not returned
+//  @receiver l list
 //  @return interface{}
 func (l *SimpleList) Front() interface{} {
 	e := l.l.Front()
@@ -73,8 +69,7 @@ func (l *SimpleList) Front() interface{} {
 	return nil
 }
 
-// Back
-//  @Description: Tail element (the last element), if nil is not returned
+// Back Tail element (the last element), if nil is not returned
 //  @receiver l
 //  @return interface{}
 func (l *SimpleList) Back() interface{} {
@@ -85,9 +80,8 @@ func (l *SimpleList) Back() interface{} {
 	return nil
 }
 
-// PopFront
-//  @Description: Get the first element and remove it, if nil is not returned
-//  @receiver l
+// PopFront Get the first element and remove it, if nil is not returned
+//  @receiver l list
 //  @return interface{}
 func (l *SimpleList) PopFront() interface{} {
 	e := l.l.Front()
@@ -98,9 +92,8 @@ func (l *SimpleList) PopFront() interface{} {
 	return nil
 }
 
-// PopBack
-//  @Description: Get the tail element and remove it, if nil is not returned
-//  @receiver l
+// PopBack Get the tail element and remove it, if nil is not returned
+//  @receiver l list
 //  @return interface{}
 func (l *SimpleList) PopBack() interface{} {
 	e := l.l.Back()
@@ -111,16 +104,14 @@ func (l *SimpleList) PopBack() interface{} {
 	return nil
 }
 
-// Len
-//  @Description:
-//  @receiver l
-//  @return int
+// Len get list length
+//  @receiver l list
+//  @return int list length
 func (l *SimpleList) Len() int {
 	return l.l.Len()
 }
 
 // Foreach
-//  @Description:
 //  @receiver l
 //  @param f The function that accepts polling returns true to continue polling and false to terminate polling
 func (l *SimpleList) Foreach(f func(interface{}) bool) {
@@ -131,11 +122,10 @@ func (l *SimpleList) Foreach(f func(interface{}) bool) {
 	}
 }
 
-// Find
-//  @Description: Query whether there is a parameter object in the linked list
-//  @receiver l
-//  @param i
-//  @return bool bool success is true, fail is false
+// Find Query whether there is a parameter object in the linked list
+//  @receiver l list
+//  @param i elemnt
+//  @return bool success is true, fail is false
 func (l *SimpleList) Find(i interface{}) bool {
 	for e := l.l.Front(); e != nil; e = e.Next() {
 		if reflect.DeepEqual(i, e.Value) {

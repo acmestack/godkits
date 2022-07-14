@@ -26,22 +26,16 @@ type QueueElem list.Element
 //
 type QueueListener interface {
 
-	// PostTouch
-	//  @Description: Element hit, which is called after the element is moved to the queue head
-	//  @param v
-	//
+	// PostTouch Element hit, which is called after the element is moved to the queue head
+	//  @param v any type
 	PostTouch(v interface{})
 
-	// PostInsert
-	//  @Description: Called after the element is newly added to the queue header
-	//  @param v
-	//
+	// PostInsert Called after the element is newly added to the queue header
+	//  @param v any type
 	PostInsert(v interface{})
 
-	// PostDelete
-	//  @Description: Called after the element is deleted from the queue
-	//  @param v
-	//
+	// PostDelete Called after the element is deleted from the queue
+	//  @param v any type
 	PostDelete(v interface{})
 }
 
@@ -57,18 +51,14 @@ type Queue interface {
 	Delete(elem *QueueElem)
 }
 
-// LruQueue struct
-//  @Description: LruQueue
-//
 type LruQueue struct {
 	list      *list.List
 	cap       int
 	listeners []QueueListener
 }
 
-// NewLruElement
-//  @Description: NewLruElement by value
-//  @param v
+// NewLruElement NewLruElement by value
+//  @param v value
 //  @return *QueueElem
 func NewLruElement(v interface{}) *QueueElem {
 	return &QueueElem{
@@ -76,10 +66,9 @@ func NewLruElement(v interface{}) *QueueElem {
 	}
 }
 
-// NewLruQueue
-//  @Description: new a appoint capacity NewLruQueue
+// NewLruQueue new a appoint capacity NewLruQueue
 //  @param cap capacity
-//  @return *LruQueue
+//  @return *LruQueue lruQueue
 func NewLruQueue(cap int) *LruQueue {
 	return &LruQueue{
 		list:      list.New(),
@@ -88,18 +77,16 @@ func NewLruQueue(cap int) *LruQueue {
 	}
 }
 
-// AddListener
-//  @Description:
-//  @receiver q
-//  @param listener
+// AddListener add queue listener
+//  @receiver q queue
+//  @param listener listener
 func (q *LruQueue) AddListener(listener QueueListener) {
 	q.listeners = append(q.listeners, listener)
 }
 
-// Touch
-//  @Description:
-//  @receiver q
-//  @param elem
+// Touch touch an element
+//  @receiver q queue
+//  @param elem element
 func (q *LruQueue) Touch(elem *QueueElem) {
 	if elem != nil {
 		q.list.MoveToFront((*list.Element)(elem))
@@ -109,11 +96,10 @@ func (q *LruQueue) Touch(elem *QueueElem) {
 	}
 }
 
-// Move
-//  @Description:
-//  @receiver q
-//  @param other
-//  @param elem
+// Move more element to other queue
+//  @receiver q queue
+//  @param other other queue
+//  @param elem element
 //  @param notify
 //  @return *QueueElem
 func (q *LruQueue) Move(other *LruQueue, elem *QueueElem, notify bool) *QueueElem {
@@ -136,10 +122,9 @@ func (q *LruQueue) Move(other *LruQueue, elem *QueueElem, notify bool) *QueueEle
 	return elem
 }
 
-// Insert
-//  @Description:
-//  @receiver q
-//  @param v
+// Insert insert element into queue
+//  @receiver q queue
+//  @param v value
 //  @return *QueueElem
 func (q *LruQueue) Insert(v interface{}) *QueueElem {
 	if q.list.Len() == q.cap {
@@ -156,9 +141,8 @@ func (q *LruQueue) Insert(v interface{}) *QueueElem {
 	return (*QueueElem)(e)
 }
 
-// Delete
-//  @Description:
-//  @receiver q
+// Delete delete element in queue
+//  @receiver q queue
 //  @param elem
 func (q *LruQueue) Delete(elem *QueueElem) {
 	v := q.list.Remove((*list.Element)(elem))

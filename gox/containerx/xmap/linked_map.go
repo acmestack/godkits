@@ -51,11 +51,10 @@ func (m *LinkedMap) init() {
 	}
 }
 
-// insert
-//  @Description: insert
-//  @receiver m
-//  @param v
-//  @param at
+// insert insert element at position
+//  @receiver m map
+//  @param v element
+//  @param at point position
 //  @return *node
 func (m *LinkedMap) insert(v interface{}, at *node) *node {
 	e := &node{v: v}
@@ -68,11 +67,10 @@ func (m *LinkedMap) insert(v interface{}, at *node) *node {
 	return e
 }
 
-// Put
-//  @Description: Put key,value
-//  @receiver m
-//  @param key
-//  @param value
+// Put put key,value
+//  @receiver m map
+//  @param key   key
+//  @param value value
 func (m *LinkedMap) Put(key, value interface{}) {
 	if e, ok := m.m[key]; ok {
 		e.v = [2]interface{}{key, value}
@@ -84,13 +82,12 @@ func (m *LinkedMap) Put(key, value interface{}) {
 	m.m[key] = n
 }
 
-// GetOrPut
-//  @Description: Try to add an element to the map. If the element already exists, return the existing element directly without adding it
-//  @receiver m
-//  @param key
-//  @param value
-//  @return actual Key already exists return old value, not exists return new value
-//  @return loaded loaded success is true, fail is false
+// GetOrPut Try to add an element to the map. If the element already exists, return the existing element directly without adding it
+//  @receiver m map
+//  @param key   key
+//  @param value value
+//  @return actual key already exists return old value, not exists return new value
+//  @return loaded  success is true, fail is false
 func (m *LinkedMap) GetOrPut(key, value interface{}) (actual interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -103,11 +100,10 @@ func (m *LinkedMap) GetOrPut(key, value interface{}) (actual interface{}, loaded
 	return value, false
 }
 
-// Get
-//  @Description:
-//  @receiver m
-//  @param key
-//  @return value
+// Get get value by key
+//  @receiver m map
+//  @param key    key
+//  @return value value
 //  @return loaded loaded success is true, fail is false
 func (m *LinkedMap) Get(key interface{}) (value interface{}, loaded bool) {
 	o, ok := m.m[key]
@@ -117,10 +113,9 @@ func (m *LinkedMap) Get(key interface{}) (value interface{}, loaded bool) {
 	return nil, false
 }
 
-// Delete
-//  @Description: delete by key
-//  @receiver m
-//  @param key
+// Delete delete element by key
+//  @receiver m map
+//  @param key key
 func (m *LinkedMap) Delete(key interface{}) {
 	if n, ok := m.m[key]; ok {
 		n.prev.next = n.next
@@ -130,16 +125,14 @@ func (m *LinkedMap) Delete(key interface{}) {
 	}
 }
 
-// Size
-//  @Description:
-//  @receiver m
-//  @return int
+// Size map size
+//  @receiver m map
+//  @return int map size
 func (m *LinkedMap) Size() int {
 	return len(m.m)
 }
 
-// Foreach
-//  @Description: Foreach O(N)
+// Foreach O(N)
 //  @receiver m
 //  @param f The function that accepts polling returns true to continue polling and false to terminate polling
 func (m *LinkedMap) Foreach(f func(key interface{}, value interface{}) bool) {
@@ -151,10 +144,9 @@ func (m *LinkedMap) Foreach(f func(key interface{}, value interface{}) bool) {
 	}
 }
 
-// Find
-//  @Description: Find key to Map
-//  @receiver m
-//  @param key
+// Find find key in Map
+//  @receiver m map
+//  @param key key
 //  @return bool loaded loaded success is true, fail is false
 func (m *LinkedMap) Find(key interface{}) bool {
 	_, ok := m.m[key]
@@ -170,11 +162,10 @@ func NewSimpleLinkedMap() *SimpleLinkedMap {
 	return &SimpleLinkedMap{list.New(), make(map[interface{}]*list.Element)}
 }
 
-// Put
-//  @Description: Put key,value
-//  @receiver m
-//  @param key
-//  @param value
+// Put put key,value
+//  @receiver m map
+//  @param key key
+//  @param value value
 func (m *SimpleLinkedMap) Put(key, value interface{}) {
 	if e, ok := m.m[key]; ok {
 		e.Value = [2]interface{}{key, value}
@@ -182,13 +173,12 @@ func (m *SimpleLinkedMap) Put(key, value interface{}) {
 	m.m[key] = m.l.PushBack([2]interface{}{key, value})
 }
 
-// GetOrPut
-//  @Description: Try to add an element to the map. If the element already exists, return the existing element directly without adding it
-//  @receiver m
-//  @param key
-//  @param value
+// GetOrPut try to add an element to the map. If the element already exists, return the existing element directly without adding it
+//  @receiver m map
+//  @param key   key
+//  @param value value
 //  @return actual Key already exists return old value, not exists return new value
-//  @return loaded loaded success is true, fail is false
+//  @return loaded  success is true, fail is false
 func (m *SimpleLinkedMap) GetOrPut(key, value interface{}) (actual interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -198,12 +188,11 @@ func (m *SimpleLinkedMap) GetOrPut(key, value interface{}) (actual interface{}, 
 	return value, false
 }
 
-// Get
-//  @Description:
-//  @receiver m
-//  @param key
-//  @return value
-//  @return loaded loaded success is true, fail is false
+// Get get element by key
+//  @receiver m map
+//  @param key    key
+//  @return value value
+//  @return loaded  success is true, fail is false
 func (m *SimpleLinkedMap) Get(key interface{}) (value interface{}, loaded bool) {
 	o, ok := m.m[key]
 	if ok {
@@ -212,10 +201,9 @@ func (m *SimpleLinkedMap) Get(key interface{}) (value interface{}, loaded bool) 
 	return nil, false
 }
 
-// Delete
-//  @Description:
-//  @receiver m
-//  @param key
+// Delete delete element by key
+//  @receiver m map
+//  @param key key
 func (m *SimpleLinkedMap) Delete(key interface{}) {
 	if e, ok := m.m[key]; ok {
 		m.l.Remove(e)
@@ -224,15 +212,13 @@ func (m *SimpleLinkedMap) Delete(key interface{}) {
 }
 
 // Size
-//  @Description:
-//  @receiver m
-//  @return int
+//  @receiver m map
+//  @return int map size
 func (m *SimpleLinkedMap) Size() int {
 	return len(m.m)
 }
 
-// Foreach
-//  @Description: Foreach O(N)
+// Foreach O(N)
 //  @receiver m
 //  @param f The function that accepts polling returns true to continue polling and false to terminate polling
 func (m *SimpleLinkedMap) Foreach(f func(key interface{}, value interface{}) bool) {
@@ -244,11 +230,10 @@ func (m *SimpleLinkedMap) Foreach(f func(key interface{}, value interface{}) boo
 	}
 }
 
-// Find
-//  @Description: Find key to Map
-//  @receiver m
-//  @param key
-//  @return bool loaded loaded success is true, fail is false
+// Find find key in map
+//  @receiver m map
+//  @param key key
+//  @return bool loaded success is true, fail is false
 func (m *SimpleLinkedMap) Find(key interface{}) bool {
 	_, ok := m.m[key]
 	return ok

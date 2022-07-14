@@ -19,35 +19,45 @@ package listx
 
 import "container/list"
 
-type any = interface{}
+type Any = interface{}
 
 // Listx extend from list.List
 type Listx struct {
 	list.List
 }
 
-// NotEmpty list
+// NotEmpty judge list is not empty
+//  @param lst list
+//  @return bool true => not empty, false => empty
 func NotEmpty(lst *list.List) bool {
 	return !Empty(lst)
 }
 
-// NotEmpty list
+// NotEmpty judge list is not empty
+//  @receiver lst list
+//  @return bool true => not empty, false => empty
 func (lst *Listx) NotEmpty() bool {
 	return !lst.Empty()
 }
 
-// Empty list
+// Empty judge list is empty
+//  @param lst list
+//  @return bool true => empty, false => not empty
 func Empty(lst *list.List) bool {
 	return lst.Len() == 0
 }
 
-// Empty list
+// Empty judge list is empty
+//  @receiver lst list
+//  @return bool true => empty, false => not empty
 func (lst *Listx) Empty() bool {
 	return lst.Len() == 0
 }
 
 // ForEach iterates over the list, calling fn on each element.
-func (lst *Listx) ForEach(fn func(any)) {
+//  @receiver lst list
+//  @param fn function
+func (lst *Listx) ForEach(fn func(Any)) {
 	if lst == nil || fn == nil {
 		return
 	}
