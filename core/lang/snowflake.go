@@ -19,7 +19,6 @@ package lang
 
 import (
 	"fmt"
-	"github.com/acmestack/godkits/log"
 	"sync"
 	"time"
 )
@@ -91,7 +90,7 @@ func (s *Snowflake) NextVal() int64 {
 	t := now - epoch
 	if t > timestampMax {
 		s.Unlock()
-		log.Error("epoch must be between 0 and %d", timestampMax-1)
+		fmt.Println(fmt.Sprintf("epoch must be between 0 and %d", timestampMax-1))
 		return 0
 	}
 	s.timestamp = now

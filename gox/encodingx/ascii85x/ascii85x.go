@@ -15,26 +15,23 @@
  * limitations under the License.
  */
 
-package log
+package ascii85x
 
 import (
-	"testing"
-	"time"
+	"encoding/ascii85"
 )
 
-func TestInfo(t *testing.T) {
-	Info("123")
-	Info("", 5, 1.1, "test")
-	Info("%d %s", 5, "test")
-	InnerLog("123")
+// Ascii85EncodeToInt ascii85x convert bytes to int
+func Ascii85EncodeToInt(dst, src []byte) int {
+	return ascii85.Encode(dst, src)
 }
 
-func TestDebug(t *testing.T) {
-	Debug("123")
-	Debug("", 5, 1.1, "test", time.Now())
+// Ascii85Decode ascii85x convert bytes and the number  to number of bytes
+func Ascii85Decode(dst, src []byte, flush bool) (ndst, nsrc int, err error) {
+	return ascii85.Decode(dst, src, flush)
 }
 
-func TestError(t *testing.T) {
-	Error("123")
-	Error("", 5, 1.1, "test", time.Now())
+// Ascii85MaxEncodedLenToInt ascii85x convert int to int
+func Ascii85MaxEncodedLenToInt(n int) int {
+	return ascii85.MaxEncodedLen(n)
 }
