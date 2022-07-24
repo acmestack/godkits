@@ -67,3 +67,39 @@ func TestIsTrue(t *testing.T) {
 func TestIsFalse(t *testing.T) {
 	IsFalse(t, reflect.DeepEqual("foo", "bar"), "msg!")
 }
+
+func TestPanicPanics(t *testing.T) {
+	if got, want := doesPanic(2, func() { panic("foo") }, ""), ""; got != want {
+		t.Fatalf("got %q want %q", got, want)
+	}
+}
+
+func TestPanicPanicsAndMatches(t *testing.T) {
+	if got, want := doesPanic(2, func() { panic("foo") }, "foo"), ""; got != want {
+		t.Fatalf("got %q want %q", got, want)
+	}
+}
+
+func TestPanicPanicsAndDoesNotMatch(t *testing.T) {
+	if got, want := doesPanic(2, func() { panic("foo") }, "bar"), "\tassert.go:118: got foo which does not match bar\n"; got != want {
+		t.Fatalf("got %q want %q", got, want)
+	}
+}
+
+func TestPanicPanicsAndDoesNotPanic(t *testing.T) {
+	if got, want := doesPanic(2, func() {}, "bar"), "\tassert.go:121: did not panic\n"; got != want {
+		t.Fatalf("got %q want %q", got, want)
+	}
+}
+
+func TestMatchesMatches(t *testing.T) {
+	if got, want := matches(2, "aaa", "a"), ""; got != want {
+		t.Fatalf("got %q want %q", got, want)
+	}
+}
+
+func TestMatchesDoesNotMatch(t *testing.T) {
+	if got, want := matches(2, "aaa", "b"), "\tassert_test.go:102: got aaa which does not match b\n"; got != want {
+		t.Fatalf("got %q want %q", got, want)
+	}
+}
