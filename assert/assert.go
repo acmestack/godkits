@@ -19,7 +19,9 @@ package assert
 
 import (
 	"fmt"
+	"path/filepath"
 	"reflect"
+	"regexp"
 	"runtime"
 	"testing"
 )
@@ -78,6 +80,77 @@ func NotEqual(t *testing.T, exp, got interface{}, args ...interface{}) {
 	}
 	result := reflect.DeepEqual(exp, got)
 	assert(t, result, fn, 1)
+}
+
+// Panic asserts that function fn() panics.
+// It assumes that recover() either returns a string or
+// an error and fails if the message does not match
+// the regular expression in 'matches'.
+//  @param t tet
+//  @param fn function
+//  @param matches matcher
+func Panic(t *testing.T, fn func(), matches string) {
+	if x := doesPanic(2, fn, matches); x != "" {
+		fmt.Println(x)
+		t.Fail()
+	}
+}
+
+// doesPanic do panic
+//  @param skip judge skip
+//  @param fn func
+//  @param expr got
+//  @return err error
+func doesPanic(skip int, fn func(), expr string) (err string) {
+	defer func() {
+		r := recover()
+		if r == nil {
+			err = fail(skip, "did not panic")
+			return
+		}
+		var v string
+		switch r.(type) {
+		case error:
+			v = r.(error).Error()
+		case string:
+			v = r.(string)
+		}
+		err = matches(skip, v, expr)
+	}()
+	fn()
+	return ""
+}
+
+// Matches asserts that a value matches a given regular expression.
+//  @param t test
+//  @param value value
+//  @param expr got
+func Matches(t *testing.T, value, expr string) {
+	if x := matches(2, value, expr); x != "" {
+		fmt.Println(x)
+		t.Fail()
+	}
+}
+
+// matches matches got and expr value
+//  @param skip judge skip
+//  @param value value
+//  @param expr got
+//  @return string result
+func matches(skip int, value, expr string) string {
+	ok, err := regexp.MatchString(expr, value)
+	if err != nil {
+		return fail(skip, "invalid pattern %q. %s", expr, err)
+	}
+	if !ok {
+		return fail(skip, "got %s which does not match %s", value, expr)
+	}
+	return ""
+}
+
+func fail(skip int, format string, args ...interface{}) string {
+	_, file, line, _ := runtime.Caller(skip)
+	return fmt.Sprintf("\t%s:%d: %s\n", filepath.Base(file), line, fmt.Sprintf(format, args...))
 }
 
 // assert  assertion
