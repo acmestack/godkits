@@ -63,21 +63,33 @@ func DefaultIfEmpty(str string, defaultStr string) string {
 // ToInt convert string int
 // wrap strconv.Atoi
 func ToInt(str string) int {
+	return ToIntOrDefault(str, 0)
+}
+
+// ToIntOrDefault convert string int, if str empty or err you can get default value tha you want.
+// wrap strconv.Atoi
+func ToIntOrDefault(str string, defVal int) int {
 	if Empty(str) {
-		return 0
+		return defVal
 	}
 	value, err := strconv.Atoi(str)
-	return defaultx.DefaultIntIfError(err, value, 0)
+	return defaultx.DefaultIntIfError(err, value, defVal)
 }
 
 // ToFloat64 convert string to float64
 // wrap strconv.ParseFloat
 func ToFloat64(str string) float64 {
+	return ToFloat64OrDefault(str, 0.0)
+}
+
+// ToFloat64OrDefault convert string to float64, if str empty or err you can get default value tha you want.
+// wrap strconv.ParseFloat
+func ToFloat64OrDefault(str string, defVal float64) float64 {
 	if Empty(str) {
-		return 0.0
+		return defVal
 	}
 	value, err := strconv.ParseFloat(str, 64)
-	return defaultx.DefaultFloat64IfError(err, value, 0.0)
+	return defaultx.DefaultFloat64IfError(err, value, defVal)
 }
 
 // ToBool convert string to bool

@@ -143,6 +143,38 @@ func TestToInt(t *testing.T) {
 	}
 }
 
+func TestToIntOrDefault(t *testing.T) {
+	type args struct {
+		str    string
+		defVal int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			args: args{str: "123"},
+			want: 123,
+		},
+		{
+			args: args{str: "", defVal: 1},
+			want: 1,
+		},
+		{
+			args: args{str: "abc", defVal: 2},
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToIntOrDefault(tt.args.str, tt.args.defVal); got != tt.want {
+				t.Errorf("ToIntOrDefault() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestToBytes(t *testing.T) {
 	type args struct {
 		str string
@@ -219,6 +251,42 @@ func TestToFloat64(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := ToFloat64(tt.args.str); got != tt.want {
 				t.Errorf("ToFloat64() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestToFloat64OrDefault(t *testing.T) {
+	type args struct {
+		str    string
+		defVal float64
+	}
+	tests := []struct {
+		name string
+		args args
+		want float64
+	}{
+		{
+			args: args{str: "0.001"},
+			want: 0.001,
+		},
+		{
+			args: args{str: ""},
+			want: 0.00,
+		},
+		{
+			args: args{str: "", defVal: 0.09},
+			want: 0.09,
+		},
+		{
+			args: args{str: "abc", defVal: 1.23},
+			want: 1.23,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ToFloat64OrDefault(tt.args.str, tt.args.defVal); got != tt.want {
+				t.Errorf("ToFloat64OrDefault() = %v, want %v", got, tt.want)
 			}
 		})
 	}
