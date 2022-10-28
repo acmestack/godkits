@@ -21,7 +21,7 @@ import "testing"
 
 func TestEmpty(t *testing.T) {
 	type args struct {
-		arr []any
+		arr []Any
 	}
 	tests := []struct {
 		name string
@@ -44,7 +44,7 @@ func TestEmpty(t *testing.T) {
 
 func TestNotEmpty(t *testing.T) {
 	type args struct {
-		arr []any
+		arr []Any
 	}
 	tests := []struct {
 		name string
@@ -52,7 +52,7 @@ func TestNotEmpty(t *testing.T) {
 		want bool
 	}{
 		{
-			args: args{arr: []any{"zcq", "z"}},
+			args: args{arr: []Any{"zcq", "z"}},
 			want: true,
 		},
 	}
